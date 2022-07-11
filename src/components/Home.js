@@ -96,6 +96,7 @@ export default function Home() {
                             />
 
                             <TextField
+                                fullWidth
                                 className="mb-2"
                                 helperText="Please enter your password"
                                 id="demo-helper-text-misaligned"
@@ -134,6 +135,7 @@ export default function Home() {
                                 label="Username"
                             />
                             <TextField
+                                fullWidth
                                 className="mb-2"
                                 helperText="Please enter your password"
                                 id="demo-helper-text-misaligned"
