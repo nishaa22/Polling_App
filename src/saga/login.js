@@ -1,0 +1,22 @@
+import { logInSuccess, logInError } from "../actions/index"
+import axios from "axios";
+
+export default function* login(action) {
+    const { username, password } = action.payload;
+    const reponse = yield call(
+        axios.get, `https://secure-refuge-14993.herokuapp.com/login?username=${username}&password=${password}`
+    );
+
+    try {
+        if (response && reponse.data) {
+            yield put(logInSuccess({ response: response.data }))
+        }
+        else {
+            yield put(logInError({ error: "Data not fetched" }))
+        }
+    }
+    catch (error) {
+        yield put(logInError({ error: "Data not fetched" }))
+
+    }
+} 
