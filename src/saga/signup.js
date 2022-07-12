@@ -1,7 +1,8 @@
 import { signUpSuccess, signUpError } from "../actions/index"
+import { put, call } from "@redux-saga/core/effects";
 import axios from "axios"
 
-export default function* signup(action) {
+export function* signup(action) {
     const { username, password, role } = action.payload;
     let response = yield call(
         axios.get, `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
@@ -19,3 +20,4 @@ export default function* signup(action) {
 
     }
 }
+export default signup;

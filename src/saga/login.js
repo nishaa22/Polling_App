@@ -1,14 +1,16 @@
 import { logInSuccess, logInError } from "../actions/index"
+import { put, call } from "@redux-saga/core/effects";
+
 import axios from "axios";
 
-export default function* login(action) {
+export function* login(action) {
     const { username, password } = action.payload;
-    const reponse = yield call(
+    const response = yield call(
         axios.get, `https://secure-refuge-14993.herokuapp.com/login?username=${username}&password=${password}`
     );
 
     try {
-        if (response && reponse.data) {
+        if (response && response.data) {
             yield put(logInSuccess({ response: response.data }))
         }
         else {
@@ -20,3 +22,4 @@ export default function* login(action) {
 
     }
 } 
+export default login;
