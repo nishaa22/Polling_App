@@ -16,7 +16,7 @@ import {
   FormHelperText,
   Link,
 } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { logInRequest, signUpRequest } from "../actions/index";
 
@@ -58,7 +58,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const [role, setRole] = React.useState("");
 
-  const handleUser = (event: SelectChangeEvent) => {
+  const handleUser = (event) => {
     setRole(event.target.value);
   };
 
@@ -81,12 +81,14 @@ export default function Home() {
     password: "",
   });
   const handleLoginSubmit = (e) => {
+    console.log("login button clicked")
     e.preventDefault();
     if (loginUser.username && loginUser.password) {
       dispatch(logInRequest({ ...loginUser }));
     }
   };
   const handleSignupSubmit = (e) => {
+    console.log("signup button clicked")
     e.preventDefault();
     if (registerUser.username && registerUser.password && registerUser.role) {
       dispatch(signUpRequest({ ...registerUser }));
@@ -98,6 +100,8 @@ export default function Home() {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value });
   };
+  console.log(registerUser.username, "asdfghjkl", registerUser.password);
+
   return (
     <div className="mt-5 absolute left-[30%]">
       <h1 className="text-center mb-3 text-sky-800">Polling App</h1>
@@ -144,7 +148,7 @@ export default function Home() {
 
                 />
 
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <FormControl sx={{  width:'100%' }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Role
                   </InputLabel>
@@ -162,7 +166,7 @@ export default function Home() {
                   </Select>
                   <FormHelperText>Please select your role</FormHelperText>
                 </FormControl>
-                <Button className="my-2" variant="contained">
+                <Button className="my-2 w-full" variant="contained" type="submit">
                   Sign Up
                 </Button>
               </form>
@@ -189,7 +193,7 @@ export default function Home() {
                   onChange={(e) => handleLoginData(e, "password")}
 
                 />
-                <Button className="my-2" variant="contained">
+                <Button className="my-2 w-full" variant="contained" type="submit">
                   Log In
                 </Button>
                 <Link to="#" underline="always">
