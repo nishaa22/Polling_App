@@ -56,10 +56,23 @@ function a11yProps(index) {
 export default function Home() {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const [role, setRole] = React.useState("");
+  const [registerUser, setRegisterUser] = React.useState({
+    username: "",
+    password: "",
+    role: "",
+  });
+  const [loginUser, setLoginUser] = React.useState({
+    username: "",
+    password: "",
+  });
 
-  const handleUser = (event) => {
-    setRole(event.target.value);
+  const handleUser = (value,type) => {
+    setRegisterUser((prev)=>{
+      return{
+        ...prev,
+        [type]:value
+      }
+    }) 
   };
 
   const [value, setValue] = React.useState(0);
@@ -71,15 +84,7 @@ export default function Home() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  const [registerUser, setRegisterUser] = React.useState({
-    username: "",
-    password: "",
-    role: "",
-  });
-  const [loginUser, setLoginUser] = React.useState({
-    username: "",
-    password: "",
-  });
+ 
   const handleLoginSubmit = (e) => {
     console.log("login button clicked")
     e.preventDefault();
@@ -100,7 +105,7 @@ export default function Home() {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value });
   };
-  console.log(registerUser.username, "asdfghjkl", registerUser.password);
+  console.log(registerUser);
 
   return (
     <div className="mt-5 absolute left-[30%]">
@@ -155,10 +160,10 @@ export default function Home() {
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    value={role}
+                    value={registerUser.role}
                     label="Role"
-                    onChange={handleUser}
-                //   onChange={(e) => handleRegisterData(e, "username")}
+                    onChange={(e)=>handleUser(e.target.value,'role')}
+                //   onChange={(e) => handleRegisterData(e, "role")}
                     
                   >
                     <MenuItem value={"admin"}>Admin</MenuItem>
