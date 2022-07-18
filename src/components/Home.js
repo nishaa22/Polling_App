@@ -15,10 +15,14 @@ import {
   MenuItem,
   FormHelperText,
   Link,
+  CircularProgress,
 } from "@mui/material";
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { logInRequest, signUpRequest } from "../actions/index";
+import history from "../history";
+import { useNavigate } from "react-router-dom";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,6 +58,8 @@ function a11yProps(index) {
 }
 
 export default function Home() {
+  let navigate = useNavigate();
+
   const theme = useTheme();
   const dispatch = useDispatch();
   const [registerUser, setRegisterUser] = React.useState({
@@ -65,17 +71,17 @@ export default function Home() {
     username: "",
     password: "",
   });
+  const [value, setValue] = React.useState(0);
 
-  const handleUser = (value,type) => {
-    setRegisterUser((prev)=>{
-      return{
+  const handleUser = (value, type) => {
+    setRegisterUser((prev) => {
+      return {
         ...prev,
-        [type]:value
+        [type]: value
       }
-    }) 
+    })
   };
 
-  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -84,7 +90,9 @@ export default function Home() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
- 
+  const signup_store = useSelector((state)=>state&&state.api_state)
+  const login_store = useSelector((state) => state && state.login_state && state.login_state);
+
   const handleLoginSubmit = (e) => {
     console.log("login button clicked")
     e.preventDefault();
@@ -105,7 +113,14 @@ export default function Home() {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value });
   };
-  console.log(registerUser);
+
+  React.useEffect(() => {
+    if (login_store.isSuccess) {
+      if (login_store.data.error === 0) {
+        navigate("/dashboard")
+      }
+    }
+  }, [login_store])
 
   return (
     <div className="mt-5 absolute left-[30%]">
@@ -120,8 +135,8 @@ export default function Home() {
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab label="Sign Up" {...a11yProps(0)} />
-            <Tab label="Log In" {...a11yProps(1)} />
+            <Tab label="Log In" {...a11yProps(0)} />
+            <Tab label="Sign Up" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
 
@@ -130,7 +145,38 @@ export default function Home() {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
+
           <TabPanel value={value} index={0} dir={theme.direction}>
+            <FormControl className="w-full">
+              <form onSubmit={handleLoginSubmit}>
+                <TextField
+                  fullWidth
+                  className="mb-2"
+                  helperText="Please enter your username"
+                  id="demo-helper-text-misaligned"
+                  label="Username"
+                  onChange={(e) => handleLoginData(e, "username")}
+
+                />
+                <TextField
+                  fullWidth
+                  className="mb-2"
+                  helperText="Please enter your password"
+                  id="demo-helper-text-misaligned"
+                  label="Password"
+                  onChange={(e) => handleLoginData(e, "password")}
+
+                />
+                <Button className="my-2 w-full" variant="contained" type="submit">
+                  {login_store.isLoading?<CircularProgress sx={{'color':'white'}}/>:"Log In"}
+                </Button>
+                <Link to="#" underline="always">
+                  {"Forgotten Password?"}
+                </Link>
+              </form>
+            </FormControl>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
             <FormControl className="w-full">
               <form onSubmit={handleSignupSubmit}>
                 <TextField
@@ -153,7 +199,7 @@ export default function Home() {
 
                 />
 
-                <FormControl sx={{  width:'100%' }}>
+                <FormControl sx={{ width: '100%' }}>
                   <InputLabel id="demo-simple-select-helper-label">
                     Role
                   </InputLabel>
@@ -162,9 +208,9 @@ export default function Home() {
                     id="demo-simple-select-helper"
                     value={registerUser.role}
                     label="Role"
-                    onChange={(e)=>handleUser(e.target.value,'role')}
-                //   onChange={(e) => handleRegisterData(e, "role")}
-                    
+                    onChange={(e) => handleUser(e.target.value, 'role')}
+                  //   onChange={(e) => handleRegisterData(e, "role")}
+
                   >
                     <MenuItem value={"admin"}>Admin</MenuItem>
                     <MenuItem value={"user"}>User</MenuItem>
@@ -172,38 +218,8 @@ export default function Home() {
                   <FormHelperText>Please select your role</FormHelperText>
                 </FormControl>
                 <Button className="my-2 w-full" variant="contained" type="submit">
-                  Sign Up
+                 {signup_store.isLoading?<CircularProgress sx={{'color':'white'}}/>:"Sign Up"}
                 </Button>
-              </form>
-            </FormControl>
-          </TabPanel>
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <FormControl className="w-full">
-              <form onSubmit={handleLoginSubmit}>
-                <TextField
-                  fullWidth
-                  className="mb-2"
-                  helperText="Please enter your username"
-                  id="demo-helper-text-misaligned"
-                  label="Username"
-                  onChange={(e) => handleLoginData(e, "username")}
-
-                />
-                <TextField
-                  fullWidth
-                  className="mb-2"
-                  helperText="Please enter your password"
-                  id="demo-helper-text-misaligned"
-                  label="Password"
-                  onChange={(e) => handleLoginData(e, "password")}
-
-                />
-                <Button className="my-2 w-full" variant="contained" type="submit">
-                  Log In
-                </Button>
-                <Link to="#" underline="always">
-                  {"Forgotten Password?"}
-                </Link>
               </form>
             </FormControl>
           </TabPanel>

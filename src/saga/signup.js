@@ -7,9 +7,14 @@ export function* signup(action) {
     let response = yield call(
         axios.get, `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
     );
+   
     try {
         if (response && response.data) {
+            console.log("signup saga")
             yield put(signUpSuccess({ response: response.data }))
+           
+            localStorage.setItem("Registered user",JSON.stringify(response))
+        
         }
         else {
             yield put(signUpError({ error: "Data not fetched" }))
@@ -17,7 +22,6 @@ export function* signup(action) {
     }
     catch (error) {
         yield put(signUpError({ error: "Data not fetched" }))
-
     }
 }
 export default signup;
