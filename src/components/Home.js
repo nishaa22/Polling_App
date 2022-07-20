@@ -20,7 +20,6 @@ import {
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { logInRequest, signUpRequest } from "../actions/index";
-import history from "../history";
 import { useNavigate } from "react-router-dom";
 
 

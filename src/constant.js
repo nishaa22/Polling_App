@@ -5,3 +5,7 @@ export const SIGN_UP_ERROR = "SIGN_UP_ERROR"
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST"
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"
 export const LOG_IN_ERROR = "LOG_IN_ERROR"
+
+export const VIEW_POLL_REQUEST = "VIEW_POLL_REQUEST"
+export const VIEW_POLL_SUCCESS = "VIEW_POLL_SUCCESS"
+export const VIEW_POLL_ERROR = "VIEW_POLL_ERROR"

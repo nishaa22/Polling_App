@@ -1,6 +1,5 @@
 import { logInSuccess, logInError } from "../actions/index"
 import { put, call } from "@redux-saga/core/effects";
-import history from "../history";
 import axios from "axios";
 
 export function* login(action) {

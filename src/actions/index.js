@@ -8,3 +8,8 @@ export const signUpError = createAction(constant.SIGN_UP_ERROR);
 export const logInRequest = createAction(constant.LOG_IN_REQUEST);
 export const logInSuccess = createAction(constant.LOG_IN_SUCCESS);
 export const logInError = createAction(constant.LOG_IN_ERROR);
+
+
+export const viewPollRequest = createAction(constant.VIEW_POLL_REQUEST);
+export const viewPollSuccess = createAction(constant.VIEW_POLL_SUCCESS);
+export const viewPollError = createAction(constant.VIEW_POLL_ERROR);
