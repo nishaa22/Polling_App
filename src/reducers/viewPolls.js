@@ -7,7 +7,7 @@ const initial_state = {
     data:null
 }
 
-const viewPoll = (state=initial_state,  action) =>{
+const viewPolls = (state=initial_state,  action) =>{
     switch(action.type){
         case actions.VIEW_POLL_REQUEST:
             return {
@@ -34,4 +34,4 @@ const viewPoll = (state=initial_state,  action) =>{
     }
 
 }
-export default viewPoll;
+export default viewPolls;

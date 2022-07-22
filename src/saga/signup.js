@@ -4,17 +4,18 @@ import axios from "axios"
 
 export function* signup(action) {
     const { username, password, role } = action.payload;
-    let response = yield call(
-        axios.get, `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
-    );
-   
     try {
+        let response = yield call(
+            axios.get, `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
+        );
+
+
         if (response && response.data) {
             console.log("signup saga")
             yield put(signUpSuccess({ response: response.data }))
-           
-            localStorage.setItem("Registered user",JSON.stringify(response))
-        
+
+            localStorage.setItem("Registered user", JSON.stringify(response))
+
         }
         else {
             yield put(signUpError({ error: "Data not fetched" }))

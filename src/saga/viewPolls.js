@@ -2,13 +2,13 @@ import { viewPollSuccess, viewPollError } from "../actions/index"
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
 
-export function* viewPoll(action) {
- 
-    const response = yield call(
-        axios.get, `https://secure-refuge-14993.herokuapp.com/list_polls`
-    );
-
+export function* viewPolls(action) {
     try {
+        const response = yield call(
+            axios.get, `https://secure-refuge-14993.herokuapp.com/list_polls`
+        );
+
+
         if (response && response.data) {
             yield put(viewPollSuccess({ response: response.data }))
             // localStorage.setItem("token",response.data.token)
@@ -21,5 +21,5 @@ export function* viewPoll(action) {
         yield put(viewPollError({ error: "Data not fetched" }))
 
     }
-} 
-export default viewPoll;
+}
+export default viewPolls;

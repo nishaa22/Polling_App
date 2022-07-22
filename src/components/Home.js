@@ -89,8 +89,8 @@ export default function Home() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  const signup_store = useSelector((state)=>state&&state.api_state)
-  const login_store = useSelector((state) => state && state.login_state && state.login_state);
+  const signup_store = useSelector((state) => state && state.api_state)
+  const login_store = useSelector((state) => state && state.login_state);
 
   const handleLoginSubmit = (e) => {
     console.log("login button clicked")
@@ -167,7 +167,7 @@ export default function Home() {
 
                 />
                 <Button className="my-2 w-full" variant="contained" type="submit">
-                  {login_store.isLoading?<CircularProgress sx={{'color':'white'}}/>:"Log In"}
+                  {login_store.isLoading ? <CircularProgress sx={{ 'color': 'white' }} /> : "Log In"}
                 </Button>
                 <Link to="#" underline="always">
                   {"Forgotten Password?"}
@@ -211,13 +211,15 @@ export default function Home() {
                   //   onChange={(e) => handleRegisterData(e, "role")}
 
                   >
+                    
                     <MenuItem value={"admin"}>Admin</MenuItem>
-                    <MenuItem value={"user"}>User</MenuItem>
+                    <MenuItem value={"guest"}>Guest</MenuItem>
                   </Select>
+
                   <FormHelperText>Please select your role</FormHelperText>
                 </FormControl>
                 <Button className="my-2 w-full" variant="contained" type="submit">
-                 {signup_store.isLoading?<CircularProgress sx={{'color':'white'}}/>:"Sign Up"}
+                  {signup_store.isLoading ? <CircularProgress sx={{ 'color': 'white' }} /> : "Sign Up"}
                 </Button>
               </form>
             </FormControl>
