@@ -159,6 +159,8 @@ const Signup = () => {
               </Stack>
             </>
           ) : null}
+          <hr />
+          <Link href="/">{"LOGIN"}</Link>
         </form>
       </FormControl>
     </div>

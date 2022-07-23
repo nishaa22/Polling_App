@@ -26,9 +26,11 @@ const navigate = useNavigate();
       dispatch(logInRequest({ ...loginUser }));
     }
   };
+  
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value.trim() });
   };
+
   useEffect(() => {
      if (login_store.isSuccess) {
        if (login_store.data.error === 0) {
