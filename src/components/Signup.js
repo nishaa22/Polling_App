@@ -121,7 +121,7 @@ const Signup = () => {
               "Sign Up"
             )}
           </Button>
-          {(signup_store.isError) ? (
+          {signup_store.isError ? (
             <>
               <Stack spacing={2} sx={{ width: "100%" }}>
                 <Snackbar
@@ -139,29 +139,26 @@ const Signup = () => {
                 </Snackbar>
               </Stack>
             </>
-          ) :null}
+          ) : null}
           {signup_store.isSuccess ? (
-                   <>
-            <Stack spacing={2} sx={{ width: "100%" }}>
-              <Snackbar
-                open={open}
-                autoHideDuration={4000}
-                onClose={handleClose}
-              >
-                <Alert
+            <>
+              <Stack spacing={2} sx={{ width: "100%" }}>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={4000}
                   onClose={handleClose}
-                  severity="success"
-                  sx={{ width: "100%" }}
                 >
-                  User Registered Successfully!
-                </Alert>
-              </Snackbar>
-            </Stack>
+                  <Alert
+                    onClose={handleClose}
+                    severity="success"
+                    sx={{ width: "100%" }}
+                  >
+                    User Registered Successfully!
+                  </Alert>
+                </Snackbar>
+              </Stack>
             </>
-          )
-          :
-          null
-          }
+          ) : null}
         </form>
       </FormControl>
     </div>
