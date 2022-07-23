@@ -5,11 +5,13 @@ const initial_state = {
     isSuccess : false,
     isError : false,
     data:null,
-    message:null
+    message:null,
+
 }
 
 const signup = (state=initial_state,  action) =>{
-    // console.log(action.payload.response,"reducer signup$$$$$$$$$$$")
+    console.log(action.payload,state,"reducer signup$$$$$$$$$$$")
+
     switch(action.type){
         case actions.SIGN_UP_REQUEST:
             return {
@@ -20,16 +22,19 @@ const signup = (state=initial_state,  action) =>{
             };
         case actions.SIGN_UP_SUCCESS:
             return {
+                ...state,
                 isLoading:false,
                 isSuccess:true,
                 isError:false,
-                data:action.payload.response
+                data:action.payload.response,
             };
         case actions.SIGN_UP_ERROR:
             return{
+                ...state,
                 isLoading:false,
                 isSuccess:false,
                 isError:true,
+                message:action.payload.message
             }
             
         default :
