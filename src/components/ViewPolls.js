@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { viewPollRequest } from "../actions";
+
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const view_polls = useSelector((state) => state.view_poll_state.data);
@@ -15,25 +16,26 @@ const ViewPolls = () => {
   return (
     <>
       <Button onClick={handleViewPoll}>View Poll</Button>
-      <Card className="flex flex-wrap">
+      <Card className="flex flex-wrap justify-center">
         {view_polls &&
           view_polls.data.map((data) => {
             // console.log(val, "val---------");
             return (
               <>
-                <CardContent className="w-1/4">
+                <CardContent className="w-1/4 border-1 m-4 shadow-lg">
                   <Typography
-                    sx={{ fontSize: 14 }}
+                    sx={{ fontSize: 16,fontWeight:'Bold' }}
                     color="text.secondary"
                     gutterBottom
+                    
                   >
-                    {data.title}
+                    {data.title}<hr/>
                     {data.options.map((val) => {
                       //   console.log(val, "options------");
                       //   console.log(val.option,"option names")
                       return (
                         <>
-                          <CardContent>
+                          <CardContent className="flex">
                             <Typography>{val.option}</Typography>
                           </CardContent>
                         </>
