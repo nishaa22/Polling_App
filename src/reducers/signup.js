@@ -30,7 +30,6 @@ const signup = (state=initial_state,  action) =>{
                 isLoading:false,
                 isSuccess:false,
                 isError:true,
-                message:action.payload.response,
             }
             
         default :
