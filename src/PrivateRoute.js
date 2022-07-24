@@ -5,7 +5,7 @@ import Login from "./components/Login";
 
 const PrivateRoute = () => {
   const isLogged = useSelector((state) => state && state.login_state.data);
-  console.log(isLogged, "login dataaaaaaa");
+  // console.log(isLogged, "login dataaaaaaa");
   return isLogged ? <Outlet /> : <Login />;
 };
 

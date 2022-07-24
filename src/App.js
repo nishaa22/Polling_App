@@ -19,7 +19,6 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
             <Route path="/viewpolls" element={<ViewPolls />} />
-
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -16,6 +16,7 @@ import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpRequest } from "../actions/index";
 import { useNavigate } from "react-router-dom";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -38,7 +39,6 @@ const Signup = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -52,7 +52,7 @@ const Signup = () => {
   };
   const signup_store = useSelector((state) => state && state.api_state);
   const handleSignupSubmit = (e) => {
-    console.log("signup button clicked");
+    // console.log("signup button clicked");
     e.preventDefault();
     if (registerUser.username && registerUser.password && registerUser.role) {
       dispatch(signUpRequest({ ...registerUser }));

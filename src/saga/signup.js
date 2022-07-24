@@ -8,12 +8,12 @@ export function* signup(action) {
     let response = yield call(
       axios.get,
       `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
-   );
-   console.log(response,"response");
+    );
+    //  console.log(response,"response");
 
     if (response && response.data) {
-      if (response.data.error===0) {
-        console.log("signup saga");
+      if (response.data.error === 0) {
+        // console.log("signup saga");
         yield put(signUpSuccess({ response: response.data }));
       } else {
         yield put(

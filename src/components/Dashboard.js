@@ -13,8 +13,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ViewPolls from "./ViewPolls";
 import { useSelector } from "react-redux";
-import LinearProgress from '@mui/material/LinearProgress';
-import { viewPollRequest} from "../actions/index";
+import LinearProgress from "@mui/material/LinearProgress";
+import { viewPollRequest } from "../actions/index";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "View Poll"];
 const settings = ["Profile", "Logout"];
@@ -22,6 +23,7 @@ const settings = ["Profile", "Logout"];
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -30,12 +32,17 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (index) => {
     setAnchorElNav(null);
+    console.log(index, "navindex");
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (index) => {
     setAnchorElUser(null);
+    console.log(index, "index");
+    if (index === 1) {
+      navigate("/");
+    }
   };
 
   const view_polls = useSelector((state) => state.view_poll_state);
@@ -92,8 +99,11 @@ const ResponsiveAppBar = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                {pages.map((page, index) => (
+                  <MenuItem
+                    key={page}
+                    onClick={() => handleCloseNavMenu(index)}
+                  >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -151,8 +161,11 @@ const ResponsiveAppBar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                {settings.map((setting, index) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={() => handleCloseUserMenu(index)}
+                  >
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
@@ -161,7 +174,11 @@ const ResponsiveAppBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      {view_polls.isLoading ? <LinearProgress color="inherit"/> : <ViewPolls />}
+      {view_polls.isLoading ? (
+        <LinearProgress color="inherit" />
+      ) : (
+        <ViewPolls />
+      )}
     </>
   );
 };
