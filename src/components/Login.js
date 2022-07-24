@@ -47,12 +47,14 @@ const navigate = useNavigate();
         <form onSubmit={handleLoginSubmit} >
           <TextField
             fullWidth
+            type="text"
             className="mb-2"
             label="Username"
             onChange={(e) => handleLoginData(e, "username")}
           />
           <TextField
             fullWidth
+            type="password"
             className="mb-2"
             label="Password"
             onChange={(e) => handleLoginData(e, "password")}
