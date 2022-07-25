@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 const pages = ["Home", "View Poll"];
 const settings = ["Profile", "Logout"];
 
-const ResponsiveAppBar = () => {
+const GuestDashboard = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const ResponsiveAppBar = () => {
               variant="h6"
               noWrap
               component="a"
-              href="/dashboard"
+              // href="/guest"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -113,7 +113,7 @@ const ResponsiveAppBar = () => {
               variant="h5"
               noWrap
               component="a"
-              href="/dashboard"
+              // href="/guest"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -182,4 +182,4 @@ const ResponsiveAppBar = () => {
     </>
   );
 };
-export default ResponsiveAppBar;
+export default GuestDashboard;

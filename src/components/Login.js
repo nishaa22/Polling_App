@@ -53,17 +53,19 @@ const Login = () => {
   useEffect(() => {
     if (login_store.isSuccess) {
       if (login_store.data.error === 0) {
-        navigate("/dashboard");
+        setTimeout(() => 
+        navigate("/guest")
+        , 1000);
       }
     }
   }, [login_store]);
-  console.log(login_store.isLoading, "loginLoading");
-  console.log(login_store.isSuccess, "loginSuccess");
-  console.log(login_store.isError, "loginError");
+  // console.log(login_store.isLoading, "loginLoading");
+  // console.log(login_store.isSuccess, "loginSuccess");
+  // console.log(login_store.isError, "loginError");
   const errorMsg = useSelector((state) => state && state.login_state.message);
   console.log(errorMsg, "error message");
   return (
-    <div className="w-1/3 mt-36 flex justify-center items-center mx-auto">
+    <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
       <FormControl>
         <h1 className="text-center mb-3">Login</h1>
 
@@ -114,7 +116,8 @@ const Login = () => {
               </Stack>
             </>
           ) : (
-            console.log("login successful error")
+            null
+            // console.log("login successful error")
           )}
           {login_store.isError ? (
             <>
@@ -134,8 +137,8 @@ const Login = () => {
                 </Snackbar>
               </Stack>
             </>
-          ) : (
-            console.log("error")
+          ) : (null
+            // console.log("error")
           )}
           <Link to="#" underline="always">
             {"Forgotten Password?"}

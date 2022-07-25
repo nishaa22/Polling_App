@@ -9,7 +9,10 @@ export const logInRequest = createAction(constant.LOG_IN_REQUEST);
 export const logInSuccess = createAction(constant.LOG_IN_SUCCESS);
 export const logInError = createAction(constant.LOG_IN_ERROR);
 
-
 export const viewPollRequest = createAction(constant.VIEW_POLL_REQUEST);
 export const viewPollSuccess = createAction(constant.VIEW_POLL_SUCCESS);
 export const viewPollError = createAction(constant.VIEW_POLL_ERROR);
+
+export const addNewPollRequest = createAction(constant.ADD_NEW_POLL_REQUEST)
+export const addNewPollSuccess = createAction(constant.ADD_NEW_POLL_SUCCESS)
+export const addNewPollError = createAction(constant.ADD_NEW_POLL_ERROR)

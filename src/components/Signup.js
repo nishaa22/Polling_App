@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-
 import {
   FormControl,
   TextField,
@@ -64,18 +63,20 @@ const Signup = () => {
   useEffect(() => {
     if (signup_store.isSuccess) {
       if (signup_store.data.error === 0) {
-        navigate("/");
+        setTimeout(() => 
+        navigate("/")
+        , 1000);
       }
     }
   }, [signup_store]);
   //   console.log(signup_store.isError,"fsdfsdfdsfdsfds")
-  console.log(signup_store.isLoading, "signupLoading");
-  console.log(signup_store.isSuccess, "signupSuccess");
-  console.log(signup_store.isError, "signupError");
+  // console.log(signup_store.isLoading, "signupLoading");
+  // console.log(signup_store.isSuccess, "signupSuccess");
+  // console.log(signup_store.isError, "signupError");
   const errorMsg = useSelector((state) => state && state.api_state.message);
   //   console.log(errorMsg, "gfvhfhgfh444444444");
   return (
-    <div className="w-1/3 mt-36 flex justify-center items-center mx-auto">
+    <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
       <FormControl>
         <h1 className="text-center mb-3">SignUp</h1>
         <form onSubmit={handleSignupSubmit}>
