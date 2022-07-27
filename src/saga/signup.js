@@ -7,15 +7,13 @@ export function* signup(action) {
   try {
     let response = yield call(
       axios.get,
-      `https://secure-refuge-14993.herokuapp.com/add_user?username=${username}&password=${password}&role=${role}`
+      `${process.env.REACT_APP_BASE_URL}/add_user?username=${username}&password=${password}&role=${role}`
     );
-     console.log(response,"response");
 
     if (response && response.data) {
       if (response.data.error === 0) {
-        // console.log("signup saga");
         yield put(signUpSuccess({ response: response.data }));
-        // localStorage.setItem("token", response.data.token)
+        localStorage.setItem("role", response.data.data.role);
       } else {
         yield put(
           signUpError({

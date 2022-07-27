@@ -6,12 +6,11 @@ export function* viewPolls(action) {
   try {
     const response = yield call(
       axios.get,
-      `https://secure-refuge-14993.herokuapp.com/list_polls`
+      `${process.env.REACT_APP_BASE_URL}/list_polls`
     );
 
     if (response && response.data) {
       yield put(viewPollSuccess({ response: response.data }));
-      // localStorage.setItem("token",response.data.token)
     } else {
       yield put(viewPollError({ error: "Data not fetched" }));
     }

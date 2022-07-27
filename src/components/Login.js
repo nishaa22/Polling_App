@@ -20,6 +20,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const errorMsg = useSelector((state) => state && state.login_state.message);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -49,21 +50,24 @@ const Login = () => {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value.trim() });
   };
-
+const userType = localStorage.getItem("userType")
   useEffect(() => {
     if (login_store.isSuccess) {
-      if (login_store.data.error === 0) {
-        setTimeout(() => 
-        navigate("/guest")
-        , 1000);
+      if (login_store.data.error === 0 ) {
+        if (userType === "Guest") {
+          setTimeout(() => navigate("/guest"), 1000);
+        } else {
+          setTimeout(() => navigate("/admin"), 1000);
+        }
       }
+     
     }
   }, [login_store]);
   // console.log(login_store.isLoading, "loginLoading");
   // console.log(login_store.isSuccess, "loginSuccess");
   // console.log(login_store.isError, "loginError");
-  const errorMsg = useSelector((state) => state && state.login_state.message);
-  console.log(errorMsg, "error message");
+  // console.log(errorMsg, "error message");
+  // console.log(process.env,"fgdgdfg")
   return (
     <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
       <FormControl>
@@ -110,7 +114,7 @@ const Login = () => {
                     severity="success"
                     sx={{ width: "100%" }}
                   >
-                    User Logged In Successfully!
+                    Logged In Successfully!
                   </Alert>
                 </Snackbar>
               </Stack>

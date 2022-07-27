@@ -16,3 +16,11 @@ export const viewPollError = createAction(constant.VIEW_POLL_ERROR);
 export const addNewPollRequest = createAction(constant.ADD_NEW_POLL_REQUEST)
 export const addNewPollSuccess = createAction(constant.ADD_NEW_POLL_SUCCESS)
 export const addNewPollError = createAction(constant.ADD_NEW_POLL_ERROR)
+
+export const deletePollRequest = createAction(constant.DELETE_POLL_REQUEST);
+export const deletePollSuccess = createAction(constant.DELETE_POLL_SUCCESS);
+export const deletePollError = createAction(constant.DELETE_POLL_ERROR);
+
+export const listUsersRequest = createAction(constant.LIST_USERS_REQUEST);
+export const listUsersSuccess = createAction(constant.LIST_USERS_SUCCESS);
+export const listUsersError = createAction(constant.LIST_USERS_ERROR);

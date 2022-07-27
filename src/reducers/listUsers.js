@@ -5,19 +5,18 @@ const initial_state = {
   isSuccess: false,
   isError: false,
   data: null,
-//   message: null,
 };
 
-const login = (state = initial_state, action) => {
+const listUsers = (state = initial_state, action) => {
   switch (action.type) {
-    case actions.ADD_NEW_POLL_REQUEST:
+    case actions.LIST_USERS_REQUEST:
       return {
         ...state,
         isLoading: true,
         isSuccess: false,
         isError: false,
       };
-    case actions.ADD_NEW_POLL_SUCCESS:
+    case actions.LIST_USERS_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -25,16 +24,15 @@ const login = (state = initial_state, action) => {
         isError: false,
         data: action.payload.response,
       };
-    case actions.ADD_NEW_POLL_ERROR:
+    case actions.LIST_USERS_ERROR:
       return {
         ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
-        //    message: action.payload.message,
       };
     default:
       return state;
   }
 };
-export default login;
+export default listUsers;

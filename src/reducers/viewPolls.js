@@ -18,6 +18,7 @@ const viewPolls = (state = initial_state, action) => {
       };
     case actions.VIEW_POLL_SUCCESS:
       return {
+        ...state,
         isLoading: false,
         isSuccess: true,
         isError: false,
@@ -25,6 +26,7 @@ const viewPolls = (state = initial_state, action) => {
       };
     case actions.VIEW_POLL_ERROR:
       return {
+        ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,

@@ -16,10 +16,10 @@ import { useSelector } from "react-redux";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home"];
+const pages = ["Home","Create Poll", "All User"];
 const settings = ["Profile", "Logout"];
 
-const GuestDashboard = () => {
+const AdminDashboard = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -32,12 +32,18 @@ const GuestDashboard = () => {
   };
 
   const handleCloseNavMenu = (index) => {
+    // console.log(index,"dkfjsdh")
     setAnchorElNav(null);
+    if (index === 1) {
+      navigate("/addnewpoll");
+    }
+     if (index === 2) {
+       navigate("/userlist");
+     }
   };
 
   const handleCloseUserMenu = (index) => {
     setAnchorElUser(null);
-    // console.log(index, "index");
     if (index === 1) {
       localStorage.clear();
       navigate("/");
@@ -47,7 +53,7 @@ const GuestDashboard = () => {
   const view_polls = useSelector((state) => state.view_poll_state);
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{'backgroundColor':'black'}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -124,10 +130,10 @@ const GuestDashboard = () => {
               POLL MANAGEMENT SYSTEM
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              {pages.map((page, index) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={()=>handleCloseNavMenu(index)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}
@@ -172,8 +178,12 @@ const GuestDashboard = () => {
       </AppBar>
       <ViewPolls />
 
-      
+      {/* {view_polls.isLoading ? (
+        <LinearProgress color="inherit" />
+      ) : (
+        <ViewPolls />
+      )} */}
     </>
   );
 };
-export default GuestDashboard;
+export default AdminDashboard;
