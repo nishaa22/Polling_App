@@ -2,8 +2,8 @@ import { fork, all, takeLatest } from "redux-saga/effects";
 import { login } from "./login";
 import { signup } from "./signup";
 import * as action from "../constant";
-import viewPolls from "./viewPolls";
-import addNewPoll from "./addNewPoll";
+import {viewPolls} from "./viewPolls";
+import {addNewPoll} from "./addNewPoll";
 
 function* signupBind() {
   yield takeLatest(action.SIGN_UP_REQUEST, signup);

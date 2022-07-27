@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
@@ -10,12 +10,15 @@ const ViewPolls = () => {
   const dispatch = useDispatch();
   const view_polls = useSelector((state) => state.view_poll_state.data);
   // console.log(view_polls, "viewPoll data");
-  const handleViewPoll = () => {
-    dispatch(viewPollRequest());
-  };
+  // const handleViewPoll = () => {
+  //   dispatch(viewPollRequest());
+  // };
+  useEffect(()=>{
+      dispatch(viewPollRequest());
+  },[])
   return (
     <>
-      <Button onClick={handleViewPoll}>View Poll</Button>
+      {/* <Button onClick={handleViewPoll}>View Poll</Button> */}
       <Card className="flex flex-wrap justify-center">
         {view_polls &&
           view_polls.data.map((data) => {

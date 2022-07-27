@@ -17,7 +17,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { viewPollRequest } from "../actions/index";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "View Poll"];
+const pages = ["Home"];
 const settings = ["Profile", "Logout"];
 
 const GuestDashboard = () => {
@@ -41,6 +41,7 @@ const GuestDashboard = () => {
     setAnchorElUser(null);
     console.log(index, "index");
     if (index === 1) {
+      localStorage.clear();
       navigate("/");
     }
   };

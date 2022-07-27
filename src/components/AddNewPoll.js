@@ -6,7 +6,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import {addNewPollRequest} from "../actions/index"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 const AddNewPoll = () => {
   const dispatch = useDispatch();
      const [addPoll, setAddPoll]= useState({
@@ -25,6 +25,8 @@ const AddNewPoll = () => {
        dispatch(addNewPollRequest({...addPoll}))
        }
      }
+     const add_new_poll_store = useSelector((state)=>state.add_new_poll_state);
+     console.log(add_new_poll_store,"add new poll store...")
      console.log(addPoll,"add poll data")
   return (
     <div>

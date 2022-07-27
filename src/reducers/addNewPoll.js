@@ -9,7 +9,6 @@ const initial_state = {
 };
 
 const login = (state = initial_state, action) => {
-  console.log(action,"FGHFDH")
   switch (action.type) {
     case actions.ADD_NEW_POLL_REQUEST:
       return {

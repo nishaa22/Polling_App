@@ -10,12 +10,13 @@ export function* login(action) {
       `https://secure-refuge-14993.herokuapp.com/login?username=${username}&password=${password}`
     );
 
-    // console.log(response, "login saga response....");
-    console.log(response.data.data);
+    console.log(response, "login saga response....");
+    // console.log(response.data.data);
     if (response && response.data) {
       if (response.data.error === 0) {
         // console.log("signup saga");
         yield put(logInSuccess({ response: response.data }));
+        localStorage.setItem("token",JSON.stringify(response.data.token))
       } else {
         yield put(
           logInError({

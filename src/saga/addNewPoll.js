@@ -10,9 +10,7 @@ export function* addNewPoll(action) {
       axios.get,
       `https://secure-refuge-14993.herokuapp.com/add_poll?title=${title}&options=${opt1}____${opt2}____${opt3}____${opt4}`
     );
-console.log(response,"saga")
     // console.log(response, "login saga response....");
-    console.log(response.data.data);
     if (response && response.data) {
       if (response.data.error === 0) {
         // console.log("signup saga");
