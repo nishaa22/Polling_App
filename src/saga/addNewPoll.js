@@ -2,14 +2,15 @@ import { addNewPollSuccess, addNewPollError } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
 
-export function* login(action) {
-  const {  } = action.payload;
+export function* addNewPoll(action) {
+  const { title,opt1,opt2,opt3,opt4 } = action.payload;
+  console.log(action.payload,"saga payload")
   try {
     const response = yield call(
       axios.get,
-      `https://secure-refuge-14993.herokuapp.com/add_poll?title=first%20polll&options=opt1____opt2____opt3____opt4`
+      `https://secure-refuge-14993.herokuapp.com/add_poll?title=${title}&options=${opt1}____${opt2}____${opt3}____${opt4}`
     );
-
+console.log(response,"saga")
     // console.log(response, "login saga response....");
     console.log(response.data.data);
     if (response && response.data) {
@@ -29,4 +30,4 @@ export function* login(action) {
     yield put(addNewPollError({ error: "Data not fetched" }));
   }
 }
-export default login;
+export default addNewPoll;

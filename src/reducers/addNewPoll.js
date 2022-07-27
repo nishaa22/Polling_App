@@ -9,22 +9,23 @@ const initial_state = {
 };
 
 const login = (state = initial_state, action) => {
+  console.log(action,"FGHFDH")
   switch (action.type) {
-    case actions.VIEW_POLL_REQUEST:
+    case actions.ADD_NEW_POLL_REQUEST:
       return {
         ...state,
         isLoading: true,
         isSuccess: false,
         isError: false,
       };
-    case actions.VIEW_POLL_SUCCESS:
+    case actions.ADD_NEW_POLL_SUCCESS:
       return {
         isLoading: false,
         isSuccess: true,
         isError: false,
         data: action.payload.response,
       };
-    case actions.VIEW_POLL_ERROR:
+    case actions.ADD_NEW_POLL_ERROR:
       return {
         isLoading: false,
         isSuccess: false,

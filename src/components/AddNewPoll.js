@@ -5,18 +5,38 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
+import {addNewPollRequest} from "../actions/index"
+import { useDispatch } from "react-redux";
 const AddNewPoll = () => {
-     
+  const dispatch = useDispatch();
+     const [addPoll, setAddPoll]= useState({
+       title:"",
+       opt1:"",
+       opt2:"",
+       opt3:"",
+       opt4:"",
+     })
+     const handleAddNewPollData =(e,key)=>{
+       setAddPoll({...addPoll,[key]:e.target.value})
+     }
+     const handleAddPollSubmit=(e)=>{
+       e.preventDefault();
+       if(addPoll.title&&addPoll.opt1&&addPoll.opt2&&addPoll.opt3&&addPoll.opt4){
+       dispatch(addNewPollRequest({...addPoll}))
+       }
+     }
+     console.log(addPoll,"add poll data")
   return (
     <div>
       <div className="w-1/5 mt-32 flex justify-center items-center mx-auto">
         <FormControl>
           {/* <h1 className="text-center mb-3">SignUp</h1> */}
-          <form>
+          <form onSubmit={handleAddPollSubmit}>
             <TextField
               fullWidth
               label="Title"
               type="text"
+              onChange={(e)=>handleAddNewPollData(e,"title")}
               //   onChange={(e) => handleRegisterData(e, "username")}
             />
 
@@ -26,6 +46,8 @@ const AddNewPoll = () => {
               label="Option 1"
               fullWidth
               variant="standard"
+              onChange={(e)=>handleAddNewPollData(e,"opt1")}
+
             />
             <TextField
               id="standard-basic"
@@ -33,6 +55,8 @@ const AddNewPoll = () => {
               label="Option 2"
               fullWidth
               variant="standard"
+              onChange={(e)=>handleAddNewPollData(e,"opt2")}
+
             />
             <TextField
               id="standard-basic"
@@ -40,6 +64,8 @@ const AddNewPoll = () => {
               label="Option 3"
               fullWidth
               variant="standard"
+              onChange={(e)=>handleAddNewPollData(e,"opt3")}
+
             />
             <TextField
               id="standard-basic"
@@ -47,6 +73,8 @@ const AddNewPoll = () => {
               label="Option 4"
               fullWidth
               variant="standard"
+              onChange={(e)=>handleAddNewPollData(e,"opt4")}
+
             />
 
             <Button
