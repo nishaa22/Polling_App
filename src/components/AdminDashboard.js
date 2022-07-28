@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home","Create Poll", "All User"];
+const pages = ["Create Poll", "All User"];
 const settings = ["Profile", "Logout"];
 
 const AdminDashboard = () => {
@@ -34,10 +34,10 @@ const AdminDashboard = () => {
   const handleCloseNavMenu = (index) => {
     // console.log(index,"dkfjsdh")
     setAnchorElNav(null);
-    if (index === 1) {
+    if (index === 0) {
       navigate("/addnewpoll");
     }
-     if (index === 2) {
+     if (index === 1) {
        navigate("/userlist");
      }
   };

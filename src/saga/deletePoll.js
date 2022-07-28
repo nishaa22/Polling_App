@@ -1,18 +1,21 @@
-import { deletePollSuccess, deletePollError } from "../actions/index";
+import {
+  deletePollSuccess,
+  deletePollError,
+  viewPollRequest,
+} from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
+import { BASE_URL } from "../config/baseUrl";
 
 export function* deletePoll(action) {
-    const {_id}=action.payload;
-    console.log(_id)
+  const { _id } = action.payload;
+  console.log(_id);
   try {
-    const response = yield call(
-      axios.get,
-      `${process.env.REACT_APP_BASE_URL}/delete_poll?id=${_id}`
-    );
-console.log(response)
+    const response = yield call(axios.get, `${BASE_URL}/delete_poll?id=${_id}`);
+    console.log(response);
     if (response && response.data) {
       yield put(deletePollSuccess({ response: response.data }));
+      yield put(viewPollRequest());
     } else {
       yield put(deletePollError({ error: "Data not fetched" }));
     }

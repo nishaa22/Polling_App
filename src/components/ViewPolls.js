@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePollRequest, viewPollRequest } from "../actions";
+import { deletePollRequest, viewPollRequest, voteRequest } from "../actions";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { CircularProgress } from "@mui/material";
 import {useNavigate} from "react-router-dom"
@@ -14,7 +14,7 @@ const ViewPolls = () => {
 
   const view_polls = useSelector((state) => state.view_poll_state.data);
   const delete_poll_store = useSelector((state) => state.delete_poll_state);
-  console.log(delete_poll_store, "hbgvfd");
+  // console.log(delete_poll_store,view_polls.data, "hbgvfd");
   // console.log(view_polls.isLoading, "viewPoll data");
   // const handleViewPoll = () => {
   //   dispatch(viewPollRequest());
@@ -30,7 +30,11 @@ const ViewPolls = () => {
     }
   };
   const userType = localStorage.getItem("userType");
-
+const voteApi = (_id,option) =>{
+  console.log(_id,option,"id.....")
+  
+  dispatch(voteRequest({_id,option}))
+}
   return (
     <>
       {/* <Button onClick={handleViewPoll}>View Poll</Button> */}
@@ -49,13 +53,14 @@ const ViewPolls = () => {
                     {data.title}
                     <hr />
                     {data.options.map((val) => {
+                      // console.log(data._id, val.option,"vote api............");
                       //   console.log(val, "options------");
                       //   console.log(val.option,"option names")
                       return (
                         <>
                           <CardContent className="flex justify-between">
                             <Typography>{val.option}</Typography>
-                            <Typography>vote:{val.vote}</Typography>
+                            <Button className="shadow-lg border-1 text-black" onClick={()=>voteApi(data._id,val.option)}>vote:{val.vote}</Button>
                           </CardContent>
                         </>
                       );
@@ -66,11 +71,12 @@ const ViewPolls = () => {
                       sx={{ backgroundColor: "crimson", color: "white" }}
                       onClick={() => deletePollFunc(data._id)}
                     >
-                      {delete_poll_store.isLoading ? (
+                      
+                      {/* {delete_poll_store.isLoading  ? (
                         <CircularProgress sx={{ color: "white" }} />
                       ) : (
                         ""
-                      )}
+                      )} */}
                       Delete
                       <DeleteIcon sx={{ color: "white" }} />
                     </Button>
