@@ -8,21 +8,24 @@ import PrivateRoute from "./PrivateRoute";
 import AddNewPoll from "./components/AddNewPoll";
 import AdminDashboard from "./components/AdminDashboard";
 import ListUsers from "./components/ListUsers";
+import EditPoll from "./components/EditPoll";
 
 function App() {
+
   return (
     <>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/register" element={<Signup />} />
             <Route element={<PrivateRoute />}>
               <Route exact path="/guest" element={<GuestDashboard />} />
               <Route exact path="/admin" element={<AdminDashboard />} />
             </Route>
             <Route path="/addnewpoll" element={<AddNewPoll />} />
             <Route path="/userlist" element={<ListUsers />} />
+            <Route exact path="/editpoll/:_id" element={<EditPoll/>} />
           </Routes>
         </BrowserRouter>
       </Provider>

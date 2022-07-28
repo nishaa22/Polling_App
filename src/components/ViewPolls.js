@@ -6,12 +6,14 @@ import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePollRequest, viewPollRequest, voteRequest } from "../actions";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { CircularProgress } from "@mui/material";
+
 import { useNavigate } from "react-router-dom";
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+ 
   const view_polls = useSelector((state) => state.view_poll_state.data);
   const delete_poll_store = useSelector((state) => state.delete_poll_state);
   // console.log(delete_poll_store,view_polls.data, "hbgvfd");
@@ -34,6 +36,10 @@ const ViewPolls = () => {
     console.log(_id, option, "id.....");
 
     dispatch(voteRequest({ _id, option }));
+  };
+  const editPoll = (_id) => {
+    console.log("edit poll clicked", _id);
+    navigate(`/editpoll/${_id}`);
   };
   return (
     <>
@@ -73,18 +79,30 @@ const ViewPolls = () => {
                     })}
                   </Typography>
                   {userType === "Admin" ? (
-                    <Button
-                      sx={{ backgroundColor: "crimson", color: "white" }}
-                      onClick={() => deletePollFunc(data._id)}
-                    >
-                      {/* {delete_poll_store.isLoading  ? (
+                    <>
+                      <Button
+                        sx={{
+                          backgroundColor: "crimson",
+                          color: "white",
+                          marginRight: "10px",
+                        }}
+                        onClick={() => deletePollFunc(data._id)}
+                      >
+                        {/* {delete_poll_store.isLoading  ? (
                         <CircularProgress sx={{ color: "white" }} />
                       ) : (
                         ""
                       )} */}
-                      Delete
-                      <DeleteIcon sx={{ color: "white" }} />
-                    </Button>
+                        Delete
+                        <DeleteIcon sx={{ color: "white" }} />
+                      </Button>
+                      <Button
+                        className="bg-primary text-white"
+                        onClick={() => editPoll(data._id)}
+                      >
+                        Edit Poll <EditIcon sx={{ color: "white" }} />
+                      </Button>
+                    </>
                   ) : (
                     ""
                   )}
