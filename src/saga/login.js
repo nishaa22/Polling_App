@@ -14,7 +14,7 @@ export function* login(action) {
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(logInSuccess({ response: response.data }));
-        // localStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
         var token = response.data.token;
         var decoded = jwt_decode(token);
         // console.log(decoded, "decoded");

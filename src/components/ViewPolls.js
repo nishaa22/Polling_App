@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deletePollRequest, viewPollRequest, voteRequest } from "../actions";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { CircularProgress } from "@mui/material";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,16 +25,16 @@ const ViewPolls = () => {
   const deletePollFunc = (_id) => {
     // console.log(_id,"id")
     dispatch(deletePollRequest({ _id }));
-    if(delete_poll_store.isSuccess){
-      navigate("/admin")
+    if (delete_poll_store.isSuccess) {
+      navigate("/admin");
     }
   };
   const userType = localStorage.getItem("userType");
-const voteApi = (_id,option) =>{
-  console.log(_id,option,"id.....")
-  
-  dispatch(voteRequest({_id,option}))
-}
+  const voteApi = (_id, option) => {
+    console.log(_id, option, "id.....");
+
+    dispatch(voteRequest({ _id, option }));
+  };
   return (
     <>
       {/* <Button onClick={handleViewPoll}>View Poll</Button> */}
@@ -60,7 +60,13 @@ const voteApi = (_id,option) =>{
                         <>
                           <CardContent className="flex justify-between">
                             <Typography>{val.option}</Typography>
-                            <Button className="shadow-lg border-1 text-black" onClick={()=>voteApi(data._id,val.option)}>vote:{val.vote}</Button>
+                            <Button
+                              variant="outlined"
+                              className="shadow-md border-2 border-black text-black"
+                              onClick={() => voteApi(data._id, val.option)}
+                            >
+                              vote:{val.vote}
+                            </Button>
                           </CardContent>
                         </>
                       );
@@ -71,7 +77,6 @@ const voteApi = (_id,option) =>{
                       sx={{ backgroundColor: "crimson", color: "white" }}
                       onClick={() => deletePollFunc(data._id)}
                     >
-                      
                       {/* {delete_poll_store.isLoading  ? (
                         <CircularProgress sx={{ color: "white" }} />
                       ) : (

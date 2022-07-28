@@ -50,17 +50,18 @@ const Login = () => {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value.trim() });
   };
-const userType = localStorage.getItem("userType")
+  const userType = localStorage.getItem("userType");
   useEffect(() => {
     if (login_store.isSuccess) {
-      if (login_store.data.error === 0 ) {
+      if (login_store.data.error === 0) {
         if (userType === "Guest") {
+          console.log("guest dashboard")
           setTimeout(() => navigate("/guest"), 1000);
         } else {
+          console.log("admin dashboard");
           setTimeout(() => navigate("/admin"), 1000);
         }
       }
-     
     }
   }, [login_store]);
   // console.log(login_store.isLoading, "loginLoading");
@@ -119,10 +120,9 @@ const userType = localStorage.getItem("userType")
                 </Snackbar>
               </Stack>
             </>
-          ) : (
-            null
-            // console.log("login successful error")
-          )}
+          ) : null
+          // console.log("login successful error")
+          }
           {login_store.isError ? (
             <>
               <Stack spacing={2} sx={{ width: "100%" }}>
@@ -141,9 +141,9 @@ const userType = localStorage.getItem("userType")
                 </Snackbar>
               </Stack>
             </>
-          ) : (null
-            // console.log("error")
-          )}
+          ) : null
+          // console.log("error")
+          }
           <Link to="#" underline="always">
             {"Forgotten Password?"}
           </Link>
