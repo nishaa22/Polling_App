@@ -7,7 +7,11 @@ import { addNewPoll } from "./addNewPoll";
 import { deletePoll } from "./deletePoll";
 import { listUsers } from "./listUsers";
 import { vote } from "./vote";
-import editPoll from "./editPoll";
+import {editPoll} from "./editPoll";
+import {deletePollOption} from "./deletePollOption";
+import {listPoll} from "./listPoll"
+import {addNewPollOption} from "./addNewPollOption"
+
 function* signupSaga() {
   yield takeLatest(action.SIGN_UP_REQUEST, signup);
 }
@@ -39,7 +43,15 @@ function* voteSaga() {
 function* editSaga() {
   yield takeLatest(action.EDIT_POLL_REQUEST, editPoll);
 }
-
+function* deletePollOptionSaga() {
+  yield takeLatest(action.DELETE_POLL_OPTION_REQUEST, deletePollOption);
+}
+function* listPollSaga() {
+  yield takeLatest(action.LIST_A_POLL_REQUEST, listPoll);
+}
+function* addNewPollOptionSaga() {
+  yield takeLatest(action.ADD_NEW_POLL_OPTION_REQUEST, addNewPollOption);
+}
 export default function* rootsaga() {
   yield all([
     fork(signupSaga),
@@ -49,6 +61,10 @@ export default function* rootsaga() {
     fork(deletePollSaga),
     fork(listUsersSaga),
     fork(voteSaga),
-    fork(editSaga)
+    fork(editSaga),
+    fork(deletePollOptionSaga),
+    fork(listPollSaga),
+    fork(addNewPollOptionSaga),
+
   ]);
 }

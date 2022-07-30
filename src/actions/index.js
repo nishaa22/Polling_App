@@ -32,3 +32,15 @@ export const voteError = createAction(constant.VOTE_ERROR)
 export const editPollRequest = createAction(constant.EDIT_POLL_REQUEST);
 export const editPollSuccess = createAction(constant.EDIT_POLL_SUCCESS);
 export const editPollError = createAction(constant.EDIT_POLL_ERROR);
+
+export const deletePollOptionRequest = createAction(constant.DELETE_POLL_OPTION_REQUEST);
+export const deletePollOptionSuccess = createAction(constant.DELETE_POLL_OPTION_SUCCESS);
+export const deletePollOptionError = createAction(constant.DELETE_POLL_OPTION_ERROR);
+
+export const listPollRequest = createAction(constant.LIST_A_POLL_REQUEST);
+export const listPollSuccess = createAction(constant.LIST_A_POLL_SUCCESS);
+export const listPollError = createAction(constant.LIST_A_POLL_ERROR);
+
+export const addNewPollOptionRequest = createAction(constant.ADD_NEW_POLL_OPTION_REQUEST)
+export const addNewPollOptionSuccess = createAction(constant.ADD_NEW_POLL_OPTION_SUCCESS)
+export const addNewPollOptionError = createAction(constant.ADD_NEW_POLL_OPTION_ERROR)

@@ -8,16 +8,16 @@ const initial_state = {
 //   message: null,
 };
 
-const addNewPoll = (state = initial_state, action) => {
+const addNewPollOption = (state = initial_state, action) => {
   switch (action.type) {
-    case actions.ADD_NEW_POLL_REQUEST:
+    case actions.ADD_NEW_POLL_OPTION_REQUEST:
       return {
         ...state,
         isLoading: true,
         isSuccess: false,
         isError: false,
       };
-    case actions.ADD_NEW_POLL_SUCCESS:
+    case actions.ADD_NEW_POLL_OPTION_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -25,7 +25,7 @@ const addNewPoll = (state = initial_state, action) => {
         isError: false,
         data: action.payload.response,
       };
-    case actions.ADD_NEW_POLL_ERROR:
+    case actions.ADD_NEW_POLL_OPTION_ERROR:
       return {
         ...state,
         isLoading: false,
@@ -37,4 +37,4 @@ const addNewPoll = (state = initial_state, action) => {
       return state;
   }
 };
-export default addNewPoll;
+export default addNewPollOption;

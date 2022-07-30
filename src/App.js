@@ -10,6 +10,8 @@ import AdminDashboard from "./components/AdminDashboard";
 import ListUsers from "./components/ListUsers";
 import EditPoll from "./components/EditPoll";
 import Profile from "./components/Profile";
+import ListPoll from "./components/ListPoll"
+import AddNewPollOption from "./components/AddNewPollOption";
 
 function App() {
 
@@ -28,6 +30,8 @@ function App() {
             <Route path="/userlist" element={<ListUsers />} />
             <Route path="/profile" element={<Profile />} />
             <Route exact path="/editpoll/:_id" element={<EditPoll/>} />
+            <Route exact path="/listpoll/:_id" element={<ListPoll/>} />
+
           </Routes>
         </BrowserRouter>
       </Provider>
