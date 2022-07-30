@@ -19,7 +19,7 @@ const rootreducer = combineReducers({
   delete_poll_state : deletePoll,
   vote_state : vote,
   update_poll_state :editPoll,
-  delete_poll_option_state :deletePollOption,
+  delete_option_state :deletePollOption,
   list_a_poll_state :listPoll,
   add_new_poll_option_state : addNewPollOption
 });

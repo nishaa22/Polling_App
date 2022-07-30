@@ -40,7 +40,7 @@ function* voteSaga() {
   yield takeLatest(action.VOTE_REQUEST, vote);
 }
 
-function* editSaga() {
+function* editPollSaga() {
   yield takeLatest(action.EDIT_POLL_REQUEST, editPoll);
 }
 function* deletePollOptionSaga() {
@@ -61,7 +61,7 @@ export default function* rootsaga() {
     fork(deletePollSaga),
     fork(listUsersSaga),
     fork(voteSaga),
-    fork(editSaga),
+    fork(editPollSaga),
     fork(deletePollOptionSaga),
     fork(listPollSaga),
     fork(addNewPollOptionSaga),

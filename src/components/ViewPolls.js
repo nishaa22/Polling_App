@@ -11,14 +11,21 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CircularProgress } from "@mui/material";
-
 import { useNavigate } from "react-router-dom";
+
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const view_polls = useSelector((state) => state.view_poll_state.data);
   const delete_poll_store = useSelector((state) => state.delete_poll_state);
+  // console.log(delete_poll_store)
   // console.log(delete_poll_store,view_polls.data, "hbgvfd");
   // console.log(view_polls.isLoading, "viewPoll data");
   // const handleViewPoll = () => {
@@ -28,10 +35,13 @@ const ViewPolls = () => {
     dispatch(viewPollRequest());
   }, []);
   const deletePollFunc = (_id) => {
+    setOpen(true);
+
     // console.log(_id,"id")
     dispatch(deletePollRequest({ _id }));
     if (delete_poll_store.isSuccess) {
-      navigate("/admin");
+      // navigate("/admin");
+      setTimeout(() => navigate("/admin"), 1000);
     }
   };
   const userType = localStorage.getItem("userType");
@@ -44,15 +54,31 @@ const ViewPolls = () => {
     navigate(`/editpoll/${_id}`);
   };
   const deletePollOptionFunc = (_id, option) => {
+    setOpen(true);
     console.log("delete poll option....");
     dispatch(deletePollOptionRequest({ _id, option }));
   };
   const list_a_poll = (_id) => {
-    console.log("list a poll....")
+    console.log("list a poll....");
     dispatch(listPollRequest({ _id }));
     navigate(`/listpoll/${_id}`);
-
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const delete_option_store = useSelector(
+    (state) => state && state.delete_option_state
+  );
+  console.log(delete_option_store);
   return (
     <>
       {/* <Button onClick={handleViewPoll}>View Poll</Button> */}
@@ -104,7 +130,7 @@ const ViewPolls = () => {
                       </>
                     );
                   })}
-
+            
                   {userType === "Guest" ? (
                     <Button
                       type="submit"
@@ -131,6 +157,7 @@ const ViewPolls = () => {
                         Delete
                         <DeleteIcon sx={{ color: "white" }} />
                       </Button>
+
                       <Button
                         className="bg-primary text-white"
                         onClick={() => editPoll(data._id, data.title)}
@@ -139,6 +166,27 @@ const ViewPolls = () => {
                       >
                         Edit Poll <EditIcon sx={{ color: "white" }} />
                       </Button>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {delete_poll_store.isSuccess ? (
+                    <>
+                      <Stack spacing={2} sx={{ width: "100%" }}>
+                        <Snackbar
+                          open={open}
+                          autoHideDuration={4000}
+                          onClose={handleClose}
+                        >
+                          <Alert
+                            onClose={handleClose}
+                            severity="success"
+                            sx={{ width: "100%" }}
+                          >
+                            Poll Deleted Successfully!
+                          </Alert>
+                        </Snackbar>
+                      </Stack>
                     </>
                   ) : (
                     ""

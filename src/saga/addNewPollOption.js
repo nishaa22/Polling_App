@@ -14,6 +14,7 @@ import {
          axios.get,
          `${BASE_URL}/add_new_option?id=${_id}&option_text=${newOpt}`
        );
+       console.log(response)
        if (response && response.data) {
          if (response.data.error === 0) {
            yield put(addNewPollOptionSuccess({ response: response.data }));

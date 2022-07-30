@@ -8,7 +8,12 @@ import {
 import { addNewPollRequest } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const AddNewPoll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,6 +42,19 @@ const AddNewPoll = () => {
   const add_new_poll_store = useSelector((state) => state.add_new_poll_state);
   console.log(add_new_poll_store, "add new poll store...");
   // console.log(addPoll, "add poll data");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+    setTimeout(() => navigate("/admin"), 3000);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -87,6 +105,7 @@ const AddNewPoll = () => {
               fullWidth
               type="submit"
               className="my-3 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              onClick={handleClick}
             >
               {/* Add new poll */}
               {add_new_poll_store.isLoading ? (
@@ -95,7 +114,28 @@ const AddNewPoll = () => {
                 "Add new poll"
               )}
             </Button>
-            {add_new_poll_store.isSuccess ? navigate("/admin") : ""}
+            {add_new_poll_store.isSuccess ? (
+              <>
+                <Stack spacing={2} sx={{ width: "100%" }}>
+                  <Snackbar
+                    open={open}
+                    autoHideDuration={4000}
+                    onClose={handleClose}
+                  >
+                    <Alert
+                      onClose={handleClose}
+                      severity="success"
+                      sx={{ width: "100%" }}
+                    >
+                      Poll Added Successfully!
+                    </Alert>
+                  </Snackbar>
+                </Stack>
+                {/* {setTimeout(()=>navigate("/admin"),1000)} */}
+              </>
+            ) : (
+              ""
+            )}
           </form>
         </FormControl>
       </div>

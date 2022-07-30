@@ -14,6 +14,7 @@ export function* addNewPoll(action) {
       axios.get,
       `${BASE_URL}/add_poll?title=${title}&options=${opt1}____${opt2}____${opt3}____${opt4}`
     );
+    // console.log(response)
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(addNewPollSuccess({ response: response.data }));

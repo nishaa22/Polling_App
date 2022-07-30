@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CardContent, Button, Typography, Box, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { editPollRequest } from "../actions";
+import { editPollRequest, editPollSuccess } from "../actions";
 import AddNewPollOption from "./AddNewPollOption";
 
 const EditPoll = () => {
@@ -15,8 +15,8 @@ const EditPoll = () => {
   const [show, setShow] = useState(false)
   // console.log(newTitle);
   const view_polls = useSelector((state) => state && state.view_poll_state.data);
-  // const update_poll_store = useSelector((state)=>state && state.update_poll_state.data);
-  // console.log(update_poll_store.isSuccess,"grfdsdax")
+  const update_poll_store = useSelector((state)=>state && state.update_poll_state);
+  console.log(update_poll_store,"grfdsdax")
   // console.log(view_polls, "rbgtvfedcsx");
   const editTitle = (e) => {
     setNewTitle(e.target.value);
@@ -50,6 +50,7 @@ setShow(!show)
                         label="Title"
                         id="standard-basic"
                         variant="standard"
+                        focused
                         defaultValue={data.title}
                         value={newTitle}
                         onChange={editTitle}

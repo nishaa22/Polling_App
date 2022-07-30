@@ -11,6 +11,7 @@ export function* login(action) {
       axios.get,
       `${BASE_URL}/login?username=${username}&password=${password}`
     );
+    console.log(response)
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(logInSuccess({ response: response.data }));
