@@ -119,8 +119,8 @@ const ViewPolls = () => {
                   {userType === "Admin" ? (
                     <>
                       <Button
-                        type="button"
-                        class="text-white bg-gradient-to-r from-red-500 via-red-700 to-red-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-2.5 py-2 text-center mr-2 mb-2"
+                        type="submit"
+                        class="ml-4 text-white bg-gradient-to-r from-red-500 via-red-700 to-red-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-2.5 py-2 text-center mr-2 mb-2"
                         onClick={() => deletePollFunc(data._id)}
                       >
                         {/* {delete_poll_store.isLoading  ? (
@@ -134,7 +134,7 @@ const ViewPolls = () => {
                       <Button
                         className="bg-primary text-white"
                         onClick={() => editPoll(data._id, data.title)}
-                        type="button"
+                        type="submit"
                         class="text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-2.5 py-2 text-center mr-2 mb-2"
                       >
                         Edit Poll <EditIcon sx={{ color: "white" }} />

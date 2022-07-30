@@ -12,13 +12,14 @@ const AddNewPollOption = () => {
   const addOption = () => {
     console.log("add", newOpt, params);
     dispatch(addNewPollOptionRequest({ _id, newOpt }));
+    setNewOpt("")
   };
   return (
     <div>
-      <Box className="flex justify-center ">
+      <Box className="flex justify-center mb-20">
         <TextField
           id="standard-basic"
-          label="Standard"
+          label="New Option"
           value={newOpt}
           variant="standard"
           onChange={(e) => setNewOpt(e.target.value)}
