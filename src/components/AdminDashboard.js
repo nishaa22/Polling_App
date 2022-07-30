@@ -37,13 +37,16 @@ const AdminDashboard = () => {
     if (index === 0) {
       navigate("/addnewpoll");
     }
-     if (index === 1) {
-       navigate("/userlist");
-     }
+    if (index === 1) {
+      navigate("/userlist");
+    }
   };
 
   const handleCloseUserMenu = (index) => {
     setAnchorElUser(null);
+    if (index === 0) {
+      navigate("/profile");
+    }
     if (index === 1) {
       localStorage.clear();
       navigate("/");
@@ -53,7 +56,7 @@ const AdminDashboard = () => {
   const view_polls = useSelector((state) => state.view_poll_state);
   return (
     <>
-      <AppBar position="static" sx={{'backgroundColor':'black'}}>
+      <AppBar position="static" sx={{ backgroundColor: "black" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -133,7 +136,7 @@ const AdminDashboard = () => {
               {pages.map((page, index) => (
                 <Button
                   key={page}
-                  onClick={()=>handleCloseNavMenu(index)}
+                  onClick={() => handleCloseNavMenu(index)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   {page}

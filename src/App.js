@@ -9,6 +9,7 @@ import AddNewPoll from "./components/AddNewPoll";
 import AdminDashboard from "./components/AdminDashboard";
 import ListUsers from "./components/ListUsers";
 import EditPoll from "./components/EditPoll";
+import Profile from "./components/Profile";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             </Route>
             <Route path="/addnewpoll" element={<AddNewPoll />} />
             <Route path="/userlist" element={<ListUsers />} />
+            <Route path="/profile" element={<Profile />} />
             <Route exact path="/editpoll/:_id" element={<EditPoll/>} />
           </Routes>
         </BrowserRouter>

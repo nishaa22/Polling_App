@@ -6,6 +6,7 @@ import addNewPoll from "./addNewPoll"
 import listUsers from "./listUsers"
 import deletePoll from "./deletePoll";
 import vote from "./vote"
+import editPoll from "../saga/editPoll";
 
 const rootreducer = combineReducers({
   api_state: signup,
@@ -14,6 +15,7 @@ const rootreducer = combineReducers({
   add_new_poll_state : addNewPoll,
   user_list_state : listUsers,
   delete_poll_state : deletePoll,
-  vote_state : vote
+  vote_state : vote,
+  update_poll_state :editPoll
 });
 export default rootreducer;

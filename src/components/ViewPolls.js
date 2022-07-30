@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   const view_polls = useSelector((state) => state.view_poll_state.data);
   const delete_poll_store = useSelector((state) => state.delete_poll_state);
   // console.log(delete_poll_store,view_polls.data, "hbgvfd");
@@ -34,11 +34,10 @@ const ViewPolls = () => {
   const userType = localStorage.getItem("userType");
   const voteApi = (_id, option) => {
     console.log(_id, option, "id.....");
-
     dispatch(voteRequest({ _id, option }));
   };
-  const editPoll = (_id) => {
-    console.log("edit poll clicked", _id);
+  const editPoll = (_id, title) => {
+    console.log("edit poll clicked", _id, title);
     navigate(`/editpoll/${_id}`);
   };
   return (
@@ -81,11 +80,8 @@ const ViewPolls = () => {
                   {userType === "Admin" ? (
                     <>
                       <Button
-                        sx={{
-                          backgroundColor: "crimson",
-                          color: "white",
-                          marginRight: "10px",
-                        }}
+                        type="button"
+                        class="text-white bg-gradient-to-r from-red-500 via-red-700 to-red-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2"
                         onClick={() => deletePollFunc(data._id)}
                       >
                         {/* {delete_poll_store.isLoading  ? (
@@ -98,7 +94,9 @@ const ViewPolls = () => {
                       </Button>
                       <Button
                         className="bg-primary text-white"
-                        onClick={() => editPoll(data._id)}
+                        onClick={() => editPoll(data._id, data.title)}
+                        type="button"
+                        class="text-white bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2"
                       >
                         Edit Poll <EditIcon sx={{ color: "white" }} />
                       </Button>

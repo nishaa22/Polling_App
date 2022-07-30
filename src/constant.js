@@ -25,3 +25,7 @@ export const LIST_USERS_ERROR = "LIST_USERS_ERROR";
 export const VOTE_REQUEST = "VOTE_REQUEST";
 export const VOTE_SUCCESS = "VOTE_SUCCESS";
 export const VOTE_ERROR = "VOTE_ERROR";
+
+export const EDIT_POLL_REQUEST = "EDIT_POLL_REQUEST";
+export const EDIT_POLL_SUCCESS = "EDIT_POLL_SUCCESS";
+export const EDIT_POLL_ERROR = "EDIT_POLL_ERROR";

@@ -28,3 +28,7 @@ export const listUsersError = createAction(constant.LIST_USERS_ERROR);
 export const voteRequest = createAction(constant.VOTE_REQUEST);
 export const voteSuccess = createAction(constant.VOTE_SUCCESS);
 export const voteError = createAction(constant.VOTE_ERROR)
+
+export const editPollRequest = createAction(constant.EDIT_POLL_REQUEST);
+export const editPollSuccess = createAction(constant.EDIT_POLL_SUCCESS);
+export const editPollError = createAction(constant.EDIT_POLL_ERROR);

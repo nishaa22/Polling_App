@@ -38,6 +38,9 @@ const GuestDashboard = () => {
   const handleCloseUserMenu = (index) => {
     setAnchorElUser(null);
     // console.log(index, "index");
+    if (index === 0) {
+      navigate("/profile");
+    }
     if (index === 1) {
       localStorage.clear();
       navigate("/");
