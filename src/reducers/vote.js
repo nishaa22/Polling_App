@@ -8,7 +8,7 @@ const initial_state = {
 };
 
 const vote = (state = initial_state, action) => {
-    console.log(action,"action")
+    // console.log(action,"action")
   switch (action.type) {
     case actions.VOTE_REQUEST:
       return {

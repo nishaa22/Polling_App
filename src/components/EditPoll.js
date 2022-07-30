@@ -14,7 +14,9 @@ const EditPoll = () => {
   const [newTitle, setNewTitle] = useState();
   const [show, setShow] = useState(false)
   // console.log(newTitle);
-  const view_polls = useSelector((state) => state.view_poll_state.data);
+  const view_polls = useSelector((state) => state && state.view_poll_state.data);
+  // const update_poll_store = useSelector((state)=>state && state.update_poll_state.data);
+  // console.log(update_poll_store.isSuccess,"grfdsdax")
   // console.log(view_polls, "rbgtvfedcsx");
   const editTitle = (e) => {
     setNewTitle(e.target.value);
@@ -76,8 +78,9 @@ setShow(!show)
                       >
                         Update Poll
                       </Button>
+
                     </form>
-                    <Button onClick={()=>addNewOption()}>Add New Poll Option</Button>
+                    <Button onClick={()=>addNewOption()}>{!show?"Add New Poll Option":"Delete New Poll Option"}</Button>
                   </Box>
                 </>
               );

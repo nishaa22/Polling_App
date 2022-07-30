@@ -1,12 +1,11 @@
 import { Box, TextField, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { addNewPollOptionRequest } from "../actions";
 
 const AddNewPollOption = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const params = useParams();
   const _id = params._id;
   const [newOpt, setNewOpt] = useState("");

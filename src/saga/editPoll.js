@@ -14,6 +14,7 @@ import {
          axios.get,
          `${BASE_URL}/update_poll_title?id=${params._id}&title=${newTitle}`
        );
+       console.log("update poll response", response);
        if (response && response.data) {
          if (response.data.error === 0) {
            yield put(editPollSuccess({ response: response.data }));

@@ -5,6 +5,7 @@ import {
   Button,
   Link,
   CircularProgress,
+  Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { logInRequest } from "../actions/index";
@@ -89,16 +90,13 @@ const Login = () => {
             label="Password"
             onChange={(e) => handleLoginData(e, "password")}
           />
-          <Button
-            className="my-2 w-full"
-            variant="contained"
-            type="submit"
-            onClick={handleClick}
+          <Button type="submit" class="w-full text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={handleClick} 
           >
             {login_store.isLoading ? (
               <CircularProgress sx={{ color: "white" }} />
             ) : (
-              "Log In"
+              <Typography variant="h6">Log In</Typography>
             )}
           </Button>
 
@@ -148,7 +146,7 @@ const Login = () => {
             {"Forgotten Password?"}
           </Link>
           <hr />
-          <Link href="/register">{"SIGNUP"}</Link>
+          <Link href="/register">{"New User? Create an Account"}</Link>
         </form>
       </FormControl>
     </div>

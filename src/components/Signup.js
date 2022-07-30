@@ -3,6 +3,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import {
+  Typography,
   FormControl,
   TextField,
   Button,
@@ -110,16 +111,14 @@ const Signup = () => {
               <MenuItem value={"Guest"}>Guest</MenuItem>
             </Select>
           </FormControl>
-          <Button
-            className="my-3 w-full"
-            variant="contained"
-            type="submit"
-            onClick={handleClick}
+          <Button type="submit" class="w-full my-2 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={handleClick} 
           >
             {signup_store.isLoading ? (
               <CircularProgress sx={{ color: "white" }} />
             ) : (
-              "Sign Up"
+              <Typography variant="h6">Sign Up</Typography>
+             
             )}
           </Button>
           {signup_store.isError ? (
@@ -160,8 +159,8 @@ const Signup = () => {
               </Stack>
             </>
           ) : null}
-          <hr />
-          <Link href="/">{"LOGIN"}</Link>
+          
+          <Link href="/">{"Already A User? Login"}</Link>
         </form>
       </FormControl>
     </div>

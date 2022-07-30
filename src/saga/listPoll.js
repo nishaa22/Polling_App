@@ -9,7 +9,7 @@ import {
    
    export function* listPoll(action) {
      const { _id } = action.payload;
-     console.log(_id)
+    //  console.log(_id)
      try {
        const response = yield call(
          axios.get,

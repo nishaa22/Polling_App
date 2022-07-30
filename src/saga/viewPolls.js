@@ -6,7 +6,7 @@ import { BASE_URL } from "../config/baseUrl";
 export function* viewPolls(action) {
   try {
     const response = yield call(axios.get, `${BASE_URL}/list_polls`);
-console.log(response,"view poll")
+// console.log(response,"view poll")
     if (response && response.data) {
       yield put(viewPollSuccess({ response: response.data }));
     } else {
