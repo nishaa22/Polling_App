@@ -31,6 +31,10 @@ const ViewPolls = () => {
   // const handleViewPoll = () => {
   //   dispatch(viewPollRequest());
   // };
+  
+    let ss = view_polls?.data.slice().reverse();
+    console.log(ss, "oooooooooooooooooo");
+  
   useEffect(() => {
     dispatch(viewPollRequest());
   }, []);
@@ -78,17 +82,18 @@ const ViewPolls = () => {
   const delete_option_store = useSelector(
     (state) => state && state.delete_option_state
   );
-  console.log(delete_option_store);
+  console.log(delete_option_store,"]]]]]]]]]]]]]]]]]]]]]]]]]");
   return (
     <>
       {/* <Button onClick={handleViewPoll}>View Poll</Button> */}
       <Card className="flex flex-wrap justify-center">
+        <></>
         {view_polls &&
-          view_polls.data.map((data) => {
-            // console.log(val, "val---------");
+          view_polls.data.reverse().map((data) => {
+            console.log(data, "val---------");
             return (
               <>
-                <CardContent className="w-1/4 border-1 m-4 shadow-lg">
+                <CardContent className="w-1/3 border-1 m-4 shadow-lg">
                   <Typography
                     sx={{ fontSize: 16, fontWeight: "Bold" }}
                     className=" px-3"
@@ -125,12 +130,17 @@ const ViewPolls = () => {
                             ) : (
                               ""
                             )}
+                            {/* {delete_option_store.isLoading? (
+                              <CircularProgress />
+                            ) : (
+                              ""
+                            )} */}
                           </Box>
                         </CardContent>
                       </>
                     );
                   })}
-            
+
                   {userType === "Guest" ? (
                     <Button
                       type="submit"

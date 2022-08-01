@@ -4,6 +4,7 @@ import {
   TextField,
   Button,
   CircularProgress,
+  Box,
 } from "@mui/material";
 import { addNewPollRequest } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -19,23 +22,20 @@ const AddNewPoll = () => {
   const navigate = useNavigate();
   const [addPoll, setAddPoll] = useState({
     title: "",
-    opt1: "",
-    opt2: "",
-    opt3: "",
-    opt4: "",
+    // opt1: "",
+    // opt2: "",
+    // opt3: "",
+    // opt4: "",
+    options: [" "],
   });
   const handleAddNewPollData = (e, key) => {
     setAddPoll({ ...addPoll, [key]: e.target.value });
   };
   const handleAddPollSubmit = (e) => {
     e.preventDefault();
-    if (
-      addPoll.title &&
-      addPoll.opt1 &&
-      addPoll.opt2 &&
-      addPoll.opt3 &&
-      addPoll.opt4
-    ) {
+    if (addPoll.title && addPoll.options) {
+  console.log(addPoll, "addpoll----");
+
       dispatch(addNewPollRequest({ ...addPoll }));
     }
   };
@@ -55,6 +55,44 @@ const AddNewPoll = () => {
     }
     setOpen(false);
   };
+  const handlePollOptionData = (index, e) => {
+    const updatedOptions = addPoll.options.map((val, elementIndex) => {
+      if (elementIndex === index) {
+        return e.target.value;
+      } else {
+        return val;
+      }
+    });
+    setAddPoll((prev) => {
+      return {
+        ...prev,
+        options: updatedOptions,
+      };
+    });
+  };
+  const addOptions = () => {
+    setAddPoll((prev) => {
+      // console.log(prev, "@@@@@@@@@@@@@@");
+
+      return {
+        ...prev,
+        options: [...prev.options, " "],
+      };
+    });
+  };
+
+  const deleteOption=(index)=>{
+    console.log(index,"delete option clicked")
+     const updatedOptions = addPoll.options.filter((opt,elementIndex)=>elementIndex!==index ) 
+     setAddPoll((prev) => {
+       return {
+         ...prev,
+         options: updatedOptions,
+       };
+     });
+  }
+
+  console.log(addPoll.options, "XXXXXXXXxxxxx");
 
   return (
     <div>
@@ -69,15 +107,35 @@ const AddNewPoll = () => {
               variant="standard"
               onChange={(e) => handleAddNewPollData(e, "title")}
             />
-            <TextField
-              id="standard-basic"
-              className="mt-3"
-              label="Option 1"
-              fullWidth
-              variant="standard"
-              onChange={(e) => handleAddNewPollData(e, "opt1")}
-            />
-            <TextField
+            {addPoll.options.length<=4 && addPoll.options.map((opt, index) => {
+              // console.log("opt",opt)
+              // console.log(index)
+              return (
+                <>
+                  <Box className="flex">
+                    <TextField
+                      key="index"
+                      id="standard-basic"
+                      className="mt-3"
+                      label="Option "
+                      fullWidth
+                      variant="standard"
+                      value={opt.options}
+                      onChange={(e) => handlePollOptionData(index, e)}
+                    />
+                    <DeleteIcon
+                      className="mt-4"
+                      sx={{ color: "#e60000" }}
+                      onClick={()=>deleteOption(index)}
+                      // onClick={() => deletePollOptionFunc(data._id, val.option)}
+                    />
+                  </Box>
+                </>
+              );
+            })}
+           {addPoll.options.length<4? <Button onClick={addOptions}>Add More Options</Button>:""}
+
+            {/* <TextField
               id="standard-basic"
               className="mt-3"
               label="Option 2"
@@ -100,7 +158,7 @@ const AddNewPoll = () => {
               fullWidth
               variant="standard"
               onChange={(e) => handleAddNewPollData(e, "opt4")}
-            />
+            /> */}
             <Button
               fullWidth
               type="submit"

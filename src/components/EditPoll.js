@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CardContent, Button, Typography, Box, TextField } from "@mui/material";
@@ -10,51 +10,80 @@ const EditPoll = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // console.log(params, "params");
-  const [newTitle, setNewTitle] = useState();
-  const [show, setShow] = useState(false)
-  // console.log(newTitle);
-  const view_polls = useSelector((state) => state && state.view_poll_state.data);
-  const update_poll_store = useSelector((state)=>state && state.update_poll_state);
-  console.log(update_poll_store,"grfdsdax")
-  // console.log(view_polls, "rbgtvfedcsx");
-  const editTitle = (e) => {
-    setNewTitle(e.target.value);
-  };
+  const [editpoll, setEditPoll] = useState({
+    title: "",
+    options: [],
+  });
+
+  const [show, setShow] = useState(false);
+
+  const view_polls = useSelector(
+    (state) => state && state.view_poll_state.data
+  );
+
+  // const update_poll_store = useSelector(
+  //   (state) => state && state.update_poll_state
+  // );
+
+  useEffect(() => {
+    if (view_polls?.data.length > 0 && params?._id) {
+      const editablePoll = view_polls?.data.filter(
+        (val) => val._id === params._id
+      );
+      setEditPoll((prev) => {
+        return {
+          ...prev,
+          title: editablePoll[0].title,
+          options: editablePoll[0].options,
+        };
+      });
+    }
+  }, [view_polls, params]);
+const updatePollTitle=(e)=>{
+   setEditPoll((prev) => {
+     return {
+       ...prev,
+       title: e.target.value,
+     };
+   });
+}
+ 
+
   const handleEdit = () => {
-    // console.log("edit");
-    dispatch(editPollRequest({ params, newTitle }));
+    dispatch(editPollRequest([params, editpoll.title]));
     navigate("/admin");
   };
-  const addNewOption=()=>{
-console.log("add Option")
-setShow(!show)
-  }
+
+  const addNewOption = () => {
+    console.log("add Option");
+    setShow(!show);
+  };
+
   return (
     <>
       <Box className="flex  justify-center mt-10">
-        {view_polls &&
-          view_polls.data.map((data) => {
-            if (data._id === params._id) {
-              return (
-                <>
-                  <Box className="w-1/3 border-1 m-4 shadow-lg p-10">
-                    <Typography className="flex justify-center py-2" variant="h5">
-                      <b>Edit Poll Title</b>
-                    </Typography>
+        <Box className="w-1/3 border-1 m-4 shadow-lg p-10">
+          <Typography className="flex justify-center py-2" variant="h5">
+            <b>Edit Poll Title</b>
+          </Typography>
 
-                    <form onSubmit={handleEdit}>
-                      <TextField
-                        className="mb-3"
-                        fullWidth
-                        label="Title"
-                        id="standard-basic"
-                        variant="standard"
-                        focused
-                        defaultValue={data.title}
-                        value={newTitle}
-                        onChange={editTitle}
-                      />
+          <form onSubmit={handleEdit}>
+            <TextField
+              className="mb-3"
+              fullWidth
+              label="Title"
+              id="standard-basic"
+              variant="standard"
+              focused
+              // defaultValue={data.title}
+              value={editpoll.title}
+              onChange={updatePollTitle}
+            />
+            {view_polls &&
+              view_polls.data.map((data) => {
+                if (data._id === params._id) {
+                  return (
+                    <>
                       {data.options.map((val, index) => {
                         return (
                           <>
@@ -79,17 +108,17 @@ setShow(!show)
                       >
                         Update Poll
                       </Button>
-
-                    </form>
-                    <Button onClick={()=>addNewOption()}>{!show?"Add New Poll Option":"Delete New Poll Option"}</Button>
-                  </Box>
-                </>
-              );
-            }
-          })}
+                    </>
+                  );
+                }
+              })}
+          </form>
+          <Button onClick={() => addNewOption()}>
+            {!show ? "Add New Poll Option" : "Delete New Poll Option"}
+          </Button>
+        </Box>
       </Box>
-      {show?<AddNewPollOption/>:""}
-
+      {show ? <AddNewPollOption /> : ""}
     </>
   );
 };

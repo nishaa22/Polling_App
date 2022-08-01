@@ -13,10 +13,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ViewPolls from "./ViewPolls";
 import { useSelector } from "react-redux";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Home"];
+const pages = [""];
 const settings = ["Profile", "Logout"];
 
 const GuestDashboard = () => {

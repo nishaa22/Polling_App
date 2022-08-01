@@ -8,11 +8,12 @@ import {
    import { BASE_URL } from "../config/baseUrl";
    
    export function* editPoll(action) {
-     const { params, newTitle } = action.payload;
+     const [ params, title ] = action.payload;
+     console.log(title, "new Title");
      try {
        const response = yield call(
          axios.get,
-         `${BASE_URL}/update_poll_title?id=${params._id}&title=${newTitle}`
+         `${BASE_URL}/update_poll_title?id=${params._id}&title=${title}`
        );
        console.log("update poll response", response);
        if (response && response.data) {

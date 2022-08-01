@@ -8,11 +8,22 @@ import axios from "axios";
 import { BASE_URL } from "../config/baseUrl";
 
 export function* addNewPoll(action) {
-  const { title, opt1, opt2, opt3, opt4 } = action.payload;
+  const { title, options } = action.payload;
+  let data;
+
+  if(options.length>1){
+
+    data = options.join("____");
+
+  } else{
+    data = options;
+  }
+
+
   try {
     const response = yield call(
       axios.get,
-      `${BASE_URL}/add_poll?title=${title}&options=${opt1}____${opt2}____${opt3}____${opt4}`
+      `${BASE_URL}/add_poll?title=${title}&options=${data}`
     );
     // console.log(response)
     if (response && response.data) {

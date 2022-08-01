@@ -35,8 +35,8 @@ const AddNewPollOption = () => {
   const add_new_poll_option_store = useSelector((state)=>state && state.add_new_poll_option_state)
   console.log(add_new_poll_option_store,"hgfdsx")
   return (
-    <div>
-      <Box className="flex justify-center mb-20">
+  
+      <Box className="flex justify-center mb-20 ">
         <TextField
           id="standard-basic"
           label="New Option"
@@ -71,7 +71,6 @@ const AddNewPollOption = () => {
           </>
         ):("")}
       </Box>
-    </div>
   );
 };
 
