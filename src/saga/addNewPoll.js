@@ -10,22 +10,16 @@ import { BASE_URL } from "../config/baseUrl";
 export function* addNewPoll(action) {
   const { title, options } = action.payload;
   let data;
-
-  if(options.length>1){
-
+  if (options.length > 1) {
     data = options.join("____");
-
-  } else{
+  } else {
     data = options;
   }
-
-
   try {
     const response = yield call(
       axios.get,
       `${BASE_URL}/add_poll?title=${title}&options=${data}`
     );
-    // console.log(response)
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(addNewPollSuccess({ response: response.data }));

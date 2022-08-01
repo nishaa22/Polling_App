@@ -40,9 +40,7 @@ const Login = () => {
     password: "",
   });
   const login_store = useSelector((state) => state && state.login_state);
-  console.log(login_store,"44444444444444444444")
   const handleLoginSubmit = (e) => {
-    // console.log("login button clicked");
     e.preventDefault();
     if (loginUser.username && loginUser.password) {
       dispatch(logInRequest({ ...loginUser }));
@@ -57,20 +55,14 @@ const Login = () => {
     if (login_store.isSuccess) {
       if (login_store.data.error === 0) {
         if (userType === "Guest") {
-          console.log("guest dashboard")
           setTimeout(() => navigate("/guest"), 1000);
         } else {
-          console.log("admin dashboard");
           setTimeout(() => navigate("/admin"), 1000);
         }
       }
     }
   }, [login_store]);
-  // console.log(login_store.isLoading, "loginLoading");
-  // console.log(login_store.isSuccess, "loginSuccess");
-  // console.log(login_store.isError, "loginError");
-  // console.log(errorMsg, "error message");
-  // console.log(process.env,"fgdgdfg")
+
   return (
     <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
       <FormControl>
@@ -91,8 +83,10 @@ const Login = () => {
             label="Password"
             onChange={(e) => handleLoginData(e, "password")}
           />
-          <Button type="submit" class="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            onClick={handleClick} 
+          <Button
+            type="submit"
+            class="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={handleClick}
           >
             {login_store.isLoading ? (
               <CircularProgress sx={{ color: "white" }} />
@@ -119,9 +113,7 @@ const Login = () => {
                 </Snackbar>
               </Stack>
             </>
-          ) : null
-          // console.log("login successful error")
-          }
+          ) : null}
           {login_store.isError ? (
             <>
               <Stack spacing={2} sx={{ width: "100%" }}>
@@ -140,9 +132,7 @@ const Login = () => {
                 </Snackbar>
               </Stack>
             </>
-          ) : null
-          // console.log("error")
-          }
+          ) : null}
           <Link to="#" underline="always">
             {"Forgotten Password?"}
           </Link>

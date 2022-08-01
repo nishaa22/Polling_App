@@ -8,7 +8,6 @@ const Profile = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   var decoded = jwt_decode(token);
 
-  // console.log(decoded, "%%%%%%%%%%%%%%%%%%");
   return (
     <div>
       <Box className="flex justify-center mt-28">

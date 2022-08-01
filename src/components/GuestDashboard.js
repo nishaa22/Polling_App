@@ -36,7 +36,6 @@ const GuestDashboard = () => {
 
   const handleCloseUserMenu = (index) => {
     setAnchorElUser(null);
-    // console.log(index, "index");
     if (index === 0) {
       navigate("/profile");
     }
@@ -173,8 +172,6 @@ const GuestDashboard = () => {
         </Container>
       </AppBar>
       <ViewPolls />
-
-      
     </>
   );
 };

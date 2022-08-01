@@ -9,8 +9,6 @@ const initial_state = {
 };
 
 const signup = (state = initial_state, action) => {
-  // console.log(action.payload,state,"reducer signup$$$$$$$$$$$")
-
   switch (action.type) {
     case actions.SIGN_UP_REQUEST:
       return {

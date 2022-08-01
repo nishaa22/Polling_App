@@ -9,10 +9,8 @@ import { BASE_URL } from "../config/baseUrl";
 
 export function* deletePoll(action) {
   const { _id } = action.payload;
-  // console.log(_id);
   try {
     const response = yield call(axios.get, `${BASE_URL}/delete_poll?id=${_id}`);
-    console.log(response);
     if (response && response.data) {
       yield put(deletePollSuccess({ response: response.data }));
       yield put(viewPollRequest());

@@ -52,7 +52,6 @@ const Signup = () => {
   };
   const signup_store = useSelector((state) => state && state.api_state);
   const handleSignupSubmit = (e) => {
-    // console.log("signup button clicked");
     e.preventDefault();
     if (registerUser.username && registerUser.password && registerUser.role) {
       dispatch(signUpRequest({ ...registerUser }));
@@ -64,18 +63,12 @@ const Signup = () => {
   useEffect(() => {
     if (signup_store.isSuccess) {
       if (signup_store.data.error === 0) {
-        setTimeout(() => 
-        navigate("/")
-        , 1000);
+        setTimeout(() => navigate("/"), 1000);
       }
     }
   }, [signup_store]);
-  //   console.log(signup_store.isError,"fsdfsdfdsfdsfds")
-  // console.log(signup_store.isLoading, "signupLoading");
-  // console.log(signup_store.isSuccess, "signupSuccess");
-  // console.log(signup_store.isError, "signupError");
+
   const errorMsg = useSelector((state) => state && state.api_state.message);
-  //   console.log(errorMsg, "gfvhfhgfh444444444");
   return (
     <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
       <FormControl>
@@ -105,20 +98,20 @@ const Signup = () => {
               label="Role"
               defaultValue={MenuItem.Guest}
               onChange={(e) => handleUser(e.target.value, "role")}
-              //   onChange={(e) => handleRegisterData(e, "role")}
             >
               <MenuItem value={"Admin"}>Admin</MenuItem>
               <MenuItem value={"Guest"}>Guest</MenuItem>
             </Select>
           </FormControl>
-          <Button type="submit" class="w-full my-2 text-white bg-gradient-to-r from-cyan-400 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            onClick={handleClick} 
+          <Button
+            type="submit"
+            class="w-full my-2 text-white bg-gradient-to-r from-cyan-400 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            onClick={handleClick}
           >
             {signup_store.isLoading ? (
               <CircularProgress sx={{ color: "white" }} />
             ) : (
               <Typography variant="h6">Sign Up</Typography>
-             
             )}
           </Button>
           {signup_store.isError ? (
@@ -159,7 +152,7 @@ const Signup = () => {
               </Stack>
             </>
           ) : null}
-          
+
           <Link href="/">{"Already A User? Login"}</Link>
         </form>
       </FormControl>

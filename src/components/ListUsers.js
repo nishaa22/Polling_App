@@ -11,10 +11,9 @@ import Stack from "@mui/material/Stack";
 const ListUsers = () => {
   const dispatch = useDispatch();
   const userList_store = useSelector((state) => state.user_list_state.data);
-  console.log(userList_store, "dfsfsdfds");
-  useEffect(()=>{
-  dispatch(listUsersRequest());
-  },[])
+  useEffect(() => {
+    dispatch(listUsersRequest());
+  }, []);
   return (
     <>
       <h2 className="bg-black text-white text-center p-2">List of all Users</h2>
@@ -58,19 +57,7 @@ const ListUsers = () => {
               );
             }
           })}
-        <Stack spacing={2} className="my-4">
-          <Pagination count={10} />
-        </Stack>
       </Card>
-
-      {/* {userList_store &&
-        userList_store.data.map((val) => {
-          return (
-            <>
-              <div>{val.username}</div>
-            </>
-          );
-        })} */}
     </>
   );
 };

@@ -5,7 +5,6 @@ const initial_state = {
   isSuccess: false,
   isError: false,
   data: null,
-//   message: null,
 };
 
 const addNewPoll = (state = initial_state, action) => {
@@ -31,7 +30,6 @@ const addNewPoll = (state = initial_state, action) => {
         isLoading: false,
         isSuccess: false,
         isError: true,
-        //    message: action.payload.message,
       };
     default:
       return state;

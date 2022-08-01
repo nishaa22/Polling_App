@@ -9,7 +9,6 @@ import {
    
    export function* listPoll(action) {
      const { _id } = action.payload;
-    //  console.log(_id)
      try {
        const response = yield call(
          axios.get,
@@ -18,7 +17,6 @@ import {
        if (response && response.data) {
          if (response.data.error === 0) {
            yield put(listPollSuccess({ response: response.data }));
-          //  yield put(viewPollRequest());
          } else {
            yield put(
              listPollError({

@@ -11,17 +11,13 @@ export function* login(action) {
       axios.get,
       `${BASE_URL}/login?username=${username}&password=${password}`
     );
-    console.log(response)
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(logInSuccess({ response: response.data }));
         var token = response.data.token;
         var decoded = jwt_decode(token);
-        // console.log(decoded, "decoded");
         localStorage.setItem("token", JSON.stringify(token));
-
         localStorage.setItem("userType", decoded.role);
-        // console.log(decoded, "token....................");
       } else {
         yield put(
           logInError({

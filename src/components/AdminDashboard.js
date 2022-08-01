@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ViewPolls from "./ViewPolls";
 import { useSelector } from "react-redux";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Create Poll", "All User"];
@@ -32,7 +31,6 @@ const AdminDashboard = () => {
   };
 
   const handleCloseNavMenu = (index) => {
-    // console.log(index,"dkfjsdh")
     setAnchorElNav(null);
     if (index === 0) {
       navigate("/addnewpoll");
@@ -53,7 +51,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const view_polls = useSelector((state) => state.view_poll_state);
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "black" }}>
@@ -180,12 +177,6 @@ const AdminDashboard = () => {
         </Container>
       </AppBar>
       <ViewPolls />
-
-      {/* {view_polls.isLoading ? (
-        <LinearProgress color="inherit" />
-      ) : (
-        <ViewPolls />
-      )} */}
     </>
   );
 };

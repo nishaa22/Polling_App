@@ -1,4 +1,4 @@
-import { voteSuccess, voteError,viewPollRequest } from "../actions/index";
+import { voteSuccess, voteError, viewPollRequest } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
 import { BASE_URL } from "../config/baseUrl";
@@ -6,7 +6,6 @@ import { BASE_URL } from "../config/baseUrl";
 export function* vote(action) {
   const { _id, option } = action.payload;
   const token = JSON.parse(localStorage.getItem("token"));
-  //   console.log(token, "token");
   try {
     const response = yield call(
       axios.get,

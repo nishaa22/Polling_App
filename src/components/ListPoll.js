@@ -25,19 +25,17 @@ const ListPoll = () => {
                     >
                       {data.title}
                     </Typography>
-                      
-                      {data.options.map((val) => {
-                        return (
-                          <>
-                            <CardContent className="flex justify-between p-3 ml-4">
-                              <Typography>{val.option}</Typography>
-                              <Typography>vote : {val.vote}</Typography>
 
-                            </CardContent>
-                          </>
-                        );
-                      })}
-                    
+                    {data.options.map((val) => {
+                      return (
+                        <>
+                          <CardContent className="flex justify-between p-3 ml-4">
+                            <Typography>{val.option}</Typography>
+                            <Typography>vote : {val.vote}</Typography>
+                          </CardContent>
+                        </>
+                      );
+                    })}
                   </Card>
                 </>
               );

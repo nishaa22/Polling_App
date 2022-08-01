@@ -22,10 +22,6 @@ const AddNewPoll = () => {
   const navigate = useNavigate();
   const [addPoll, setAddPoll] = useState({
     title: "",
-    // opt1: "",
-    // opt2: "",
-    // opt3: "",
-    // opt4: "",
     options: [" "],
   });
   const handleAddNewPollData = (e, key) => {
@@ -34,14 +30,11 @@ const AddNewPoll = () => {
   const handleAddPollSubmit = (e) => {
     e.preventDefault();
     if (addPoll.title && addPoll.options) {
-  console.log(addPoll, "addpoll----");
-
       dispatch(addNewPollRequest({ ...addPoll }));
     }
   };
   const add_new_poll_store = useSelector((state) => state.add_new_poll_state);
   console.log(add_new_poll_store, "add new poll store...");
-  // console.log(addPoll, "add poll data");
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -72,8 +65,6 @@ const AddNewPoll = () => {
   };
   const addOptions = () => {
     setAddPoll((prev) => {
-      // console.log(prev, "@@@@@@@@@@@@@@");
-
       return {
         ...prev,
         options: [...prev.options, " "],
@@ -81,18 +72,17 @@ const AddNewPoll = () => {
     });
   };
 
-  const deleteOption=(index)=>{
-    console.log(index,"delete option clicked")
-     const updatedOptions = addPoll.options.filter((opt,elementIndex)=>elementIndex!==index ) 
-     setAddPoll((prev) => {
-       return {
-         ...prev,
-         options: updatedOptions,
-       };
-     });
-  }
-
-  console.log(addPoll.options, "XXXXXXXXxxxxx");
+  const deleteOption = (index) => {
+    const updatedOptions = addPoll.options.filter(
+      (opt, elementIndex) => elementIndex !== index
+    );
+    setAddPoll((prev) => {
+      return {
+        ...prev,
+        options: updatedOptions,
+      };
+    });
+  };
 
   return (
     <div>
@@ -107,65 +97,41 @@ const AddNewPoll = () => {
               variant="standard"
               onChange={(e) => handleAddNewPollData(e, "title")}
             />
-            {addPoll.options.length<=4 && addPoll.options.map((opt, index) => {
-              // console.log("opt",opt)
-              // console.log(index)
-              return (
-                <>
-                  <Box className="flex">
-                    <TextField
-                      key="index"
-                      id="standard-basic"
-                      className="mt-3"
-                      label="Option "
-                      fullWidth
-                      variant="standard"
-                      value={opt.options}
-                      onChange={(e) => handlePollOptionData(index, e)}
-                    />
-                    <DeleteIcon
-                      className="mt-4"
-                      sx={{ color: "#e60000" }}
-                      onClick={()=>deleteOption(index)}
-                      // onClick={() => deletePollOptionFunc(data._id, val.option)}
-                    />
-                  </Box>
-                </>
-              );
-            })}
-           {addPoll.options.length<4? <Button onClick={addOptions}>Add More Options</Button>:""}
-
-            {/* <TextField
-              id="standard-basic"
-              className="mt-3"
-              label="Option 2"
-              fullWidth
-              variant="standard"
-              onChange={(e) => handleAddNewPollData(e, "opt2")}
-            />
-            <TextField
-              id="standard-basic"
-              className="mt-3"
-              label="Option 3"
-              fullWidth
-              variant="standard"
-              onChange={(e) => handleAddNewPollData(e, "opt3")}
-            />
-            <TextField
-              id="standard-basic"
-              className="mt-3"
-              label="Option 4"
-              fullWidth
-              variant="standard"
-              onChange={(e) => handleAddNewPollData(e, "opt4")}
-            /> */}
+            {addPoll.options.length <= 4 &&
+              addPoll.options.map((opt, index) => {
+                return (
+                  <>
+                    <Box className="flex">
+                      <TextField
+                        key="index"
+                        id="standard-basic"
+                        className="mt-3"
+                        label="Option "
+                        fullWidth
+                        variant="standard"
+                        value={opt.options}
+                        onChange={(e) => handlePollOptionData(index, e)}
+                      />
+                      <DeleteIcon
+                        className="mt-4"
+                        sx={{ color: "#e60000" }}
+                        onClick={() => deleteOption(index)}
+                      />
+                    </Box>
+                  </>
+                );
+              })}
+            {addPoll.options.length < 4 ? (
+              <Button onClick={addOptions}>Add More Options</Button>
+            ) : (
+              ""
+            )}
             <Button
               fullWidth
               type="submit"
               className="my-3 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
               onClick={handleClick}
             >
-              {/* Add new poll */}
               {add_new_poll_store.isLoading ? (
                 <CircularProgress sx={{ color: "white" }} />
               ) : (
@@ -189,7 +155,6 @@ const AddNewPoll = () => {
                     </Alert>
                   </Snackbar>
                 </Stack>
-                {/* {setTimeout(()=>navigate("/admin"),1000)} */}
               </>
             ) : (
               ""

@@ -21,10 +21,6 @@ const EditPoll = () => {
     (state) => state && state.view_poll_state.data
   );
 
-  // const update_poll_store = useSelector(
-  //   (state) => state && state.update_poll_state
-  // );
-
   useEffect(() => {
     if (view_polls?.data.length > 0 && params?._id) {
       const editablePoll = view_polls?.data.filter(
@@ -39,15 +35,14 @@ const EditPoll = () => {
       });
     }
   }, [view_polls, params]);
-const updatePollTitle=(e)=>{
-   setEditPoll((prev) => {
-     return {
-       ...prev,
-       title: e.target.value,
-     };
-   });
-}
- 
+  const updatePollTitle = (e) => {
+    setEditPoll((prev) => {
+      return {
+        ...prev,
+        title: e.target.value,
+      };
+    });
+  };
 
   const handleEdit = () => {
     dispatch(editPollRequest([params, editpoll.title]));
@@ -55,7 +50,6 @@ const updatePollTitle=(e)=>{
   };
 
   const addNewOption = () => {
-    console.log("add Option");
     setShow(!show);
   };
 
@@ -75,7 +69,6 @@ const updatePollTitle=(e)=>{
               id="standard-basic"
               variant="standard"
               focused
-              // defaultValue={data.title}
               value={editpoll.title}
               onChange={updatePollTitle}
             />
