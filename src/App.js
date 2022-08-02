@@ -10,27 +10,26 @@ import AdminDashboard from "./components/AdminDashboard";
 import ListUsers from "./components/ListUsers";
 import EditPoll from "./components/EditPoll";
 import Profile from "./components/Profile";
-import ListPoll from "./components/ListPoll"
+import ListPoll from "./components/ListPoll";
 import AddNewPollOption from "./components/AddNewPollOption";
 
 function App() {
-
   return (
     <>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route exact path="/register" element={<Signup />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
             <Route element={<PrivateRoute />}>
-              <Route exact path="/guest" element={<GuestDashboard />} />
-              <Route exact path="/admin" element={<AdminDashboard />} />
+              <Route path="/guest" element={<GuestDashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/addnewpoll" element={<AddNewPoll />} />
+              <Route path="/userlist" element={<ListUsers />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/editpoll/:_id" element={<EditPoll />} />
+              <Route path="/listpoll/:_id" element={<ListPoll />} />
             </Route>
-            <Route path="/addnewpoll" element={<AddNewPoll />} />
-            <Route path="/userlist" element={<ListUsers />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route exact path="/editpoll/:_id" element={<EditPoll/>} />
-            <Route exact path="/listpoll/:_id" element={<ListPoll/>} />
           </Routes>
         </BrowserRouter>
       </Provider>

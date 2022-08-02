@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { logInRequest } from "../actions/index";
+import { logInFulfill, logInRequest } from "../actions/index";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Snackbar from "@mui/material/Snackbar";
@@ -50,18 +50,17 @@ const Login = () => {
   const handleLoginData = (e, key) => {
     setLoginUser({ ...loginUser, [key]: e.target.value.trim() });
   };
-  const userType = localStorage.getItem("userType");
+
   useEffect(() => {
-    if (login_store.isSuccess) {
-      if (login_store.data.error === 0) {
-        if (userType === "Guest") {
-          setTimeout(() => navigate("/guest"), 1000);
-        } else {
-          setTimeout(() => navigate("/admin"), 1000);
-        }
+    if (localStorage.getItem("userType")) {
+      const userType = localStorage.getItem("userType");
+      if (userType === "Guest") {
+        navigate("/guest");
+      } else {
+        navigate("/admin");
       }
     }
-  }, [login_store]);
+  }, [login_store.isSuccess]);
 
   return (
     <div className="w-1/3 mt-32 flex justify-center items-center mx-auto">
@@ -133,7 +132,7 @@ const Login = () => {
               </Stack>
             </>
           ) : null}
-         
+
           <Link href="/register">{"New User? Create an Account"}</Link>
         </form>
       </FormControl>

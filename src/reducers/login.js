@@ -19,6 +19,7 @@ const login = (state = initial_state, action) => {
       };
     case actions.LOG_IN_SUCCESS:
       return {
+        ...state,
         isLoading: false,
         isSuccess: true,
         isError: false,
@@ -26,11 +27,13 @@ const login = (state = initial_state, action) => {
       };
     case actions.LOG_IN_ERROR:
       return {
+        ...state,
         isLoading: false,
         isSuccess: false,
         isError: true,
         message: action.payload.message,
       };
+
     default:
       return state;
   }

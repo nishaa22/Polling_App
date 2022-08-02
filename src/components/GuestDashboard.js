@@ -45,7 +45,6 @@ const GuestDashboard = () => {
     }
   };
 
-  const view_polls = useSelector((state) => state.view_poll_state);
   return (
     <>
       <AppBar position="static">

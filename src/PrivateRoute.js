@@ -1,11 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Login from "./components/Login";
+import { Navigate } from "react-router-dom";
 
-const PrivateRoute = () => {
-  const isLogged = JSON.parse(localStorage.getItem("token"))
-  return isLogged ? <Outlet /> : <Login />;
+const PrivateRoute = ({children}) => {
+  const isLogged = JSON.parse(localStorage.getItem("token"));
+    if (!isLogged) {
+      return <Navigate to="/" />;
+    }
+
+    return <Outlet />;
 };
 
 export default PrivateRoute;

@@ -7,10 +7,10 @@ import { addNewPoll } from "./addNewPoll";
 import { deletePoll } from "./deletePoll";
 import { listUsers } from "./listUsers";
 import { vote } from "./vote";
-import {editPoll} from "./editPoll";
-import {deletePollOption} from "./deletePollOption";
-import {listPoll} from "./listPoll"
-import {addNewPollOption} from "./addNewPollOption"
+import { editPoll } from "./editPoll";
+import { deletePollOption } from "./deletePollOption";
+import { listPoll } from "./listPoll";
+import { addNewPollOption } from "./addNewPollOption";
 
 function* signupSaga() {
   yield takeLatest(action.SIGN_UP_REQUEST, signup);
@@ -65,6 +65,5 @@ export default function* rootsaga() {
     fork(deletePollOptionSaga),
     fork(listPollSaga),
     fork(addNewPollOptionSaga),
-
   ]);
 }

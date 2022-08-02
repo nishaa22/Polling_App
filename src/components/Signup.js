@@ -63,7 +63,7 @@ const Signup = () => {
   useEffect(() => {
     if (signup_store.isSuccess) {
       if (signup_store.data.error === 0) {
-        setTimeout(() => navigate("/"), 1000);
+        setTimeout(() => navigate("/"), 500);
       }
     }
   }, [signup_store]);
