@@ -39,7 +39,7 @@ const AddNewPoll = () => {
 
   const handleClick = () => {
     setOpen(true);
-    setTimeout(() => navigate("/admin"), 3000);
+    setTimeout(() => navigate("/admin"), 1000);
   };
 
   const handleClose = (event, reason) => {
@@ -143,7 +143,7 @@ const AddNewPoll = () => {
                 <Stack spacing={2} sx={{ width: "100%" }}>
                   <Snackbar
                     open={open}
-                    autoHideDuration={4000}
+                    autoHideDuration={3000}
                     onClose={handleClose}
                   >
                     <Alert
