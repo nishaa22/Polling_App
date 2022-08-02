@@ -133,10 +133,7 @@ const Login = () => {
               </Stack>
             </>
           ) : null}
-          <Link to="#" underline="always">
-            {"Forgotten Password?"}
-          </Link>
-          <hr />
+         
           <Link href="/register">{"New User? Create an Account"}</Link>
         </form>
       </FormControl>
