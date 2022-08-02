@@ -12,7 +12,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -41,7 +40,7 @@ const ViewPolls = () => {
   const voteApi = (_id, option) => {
     dispatch(voteRequest({ _id, option }));
   };
-  const editPoll = (_id, title) => {
+  const editPoll = (_id) => {
     navigate(`/editpoll/${_id}`);
   };
   const deletePollOptionFunc = (_id, option) => {
@@ -109,6 +108,7 @@ const ViewPolls = () => {
                             ) : (
                               ""
                             )}
+                           
                           </Box>
                         </CardContent>
                       </>

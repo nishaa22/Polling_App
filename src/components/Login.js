@@ -55,9 +55,9 @@ const Login = () => {
     if (localStorage.getItem("userType")) {
       const userType = localStorage.getItem("userType");
       if (userType === "Guest") {
-        navigate("/guest");
+        setTimeout(() => navigate("/guest"), 500);
       } else {
-        navigate("/admin");
+        setTimeout(() => navigate("/admin"), 500);
       }
     }
   }, [login_store.isSuccess]);
