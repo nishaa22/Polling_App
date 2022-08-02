@@ -5,14 +5,15 @@ import {
 } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { BASE_URL } from "../config/baseUrl";
+// import { BASE_URL } from "../config/baseUrl";
+import { BASEURL } from "../baseUrl";
 
 export function* addNewPollOption(action) {
   const { _id, newOpt } = action.payload;
   try {
     const response = yield call(
       axios.get,
-      `${BASE_URL}/add_new_option?id=${_id}&option_text=${newOpt}`
+      `${BASEURL.baseUrl}/add_new_option?id=${_id}&option_text=${newOpt}`
     );
     if (response && response.data) {
       if (response.data.error === 0) {

@@ -1,7 +1,8 @@
 import { voteSuccess, voteError, viewPollRequest } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { BASE_URL } from "../config/baseUrl";
+// import { BASE_URL } from "../config/baseUrl";
+import { BASEURL } from "../baseUrl";
 
 export function* vote(action) {
   const { _id, option } = action.payload;
@@ -9,7 +10,7 @@ export function* vote(action) {
   try {
     const response = yield call(
       axios.get,
-      `${BASE_URL}/do_vote?id=${_id}&option_text=${option}`,
+      `${BASEURL.baseUrl}/do_vote?id=${_id}&option_text=${option}`,
       {
         headers: {
           access_token: `${token}`,

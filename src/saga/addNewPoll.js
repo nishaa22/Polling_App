@@ -5,8 +5,8 @@ import {
 } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { BASE_URL } from "../config/baseUrl";
-
+// import { BASE_URL } from "../config/baseUrl";
+import {BASEURL} from "../baseUrl"
 export function* addNewPoll(action) {
   const { title, options } = action.payload;
   let data;
@@ -18,7 +18,7 @@ export function* addNewPoll(action) {
   try {
     const response = yield call(
       axios.get,
-      `${BASE_URL}/add_poll?title=${title}&options=${data}`
+      `${BASEURL.baseUrl}/add_poll?title=${title}&options=${data}`
     );
     if (response && response.data) {
       if (response.data.error === 0) {

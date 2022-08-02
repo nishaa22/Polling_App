@@ -5,14 +5,15 @@ import {
 } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
-import { BASE_URL } from "../config/baseUrl";
+// import { BASE_URL } from "../config/baseUrl";
+import { BASEURL } from "../baseUrl";
 
 export function* deletePollOption(action) {
   const { _id, option } = action.payload;
   try {
     const response = yield call(
       axios.get,
-      `${BASE_URL}/delete_poll_option?id=${_id}&option_text=${option}`
+      `${BASEURL.baseUrl}/delete_poll_option?id=${_id}&option_text=${option}`
     );
     if (response && response.data) {
       yield put(deletePollOptionSuccess({ response: response.data }));
