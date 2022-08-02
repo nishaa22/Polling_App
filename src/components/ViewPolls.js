@@ -72,7 +72,7 @@ const ViewPolls = () => {
       <Card className="flex flex-wrap justify-center">
         <></>
         {view_polls &&
-          view_polls.data.reverse().map((data) => {
+          view_polls.data.map((data) => {
             return (
               <>
                 <CardContent className="w-1/3 border-1 m-4 shadow-lg">
