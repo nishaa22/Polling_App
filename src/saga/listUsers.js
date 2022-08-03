@@ -6,7 +6,10 @@ import { BASEURL } from "../baseUrl";
 
 export function* listUsers(action) {
   try {
+
     const response = yield call(axios.get, `${BASEURL.baseUrl}/list_users`);
+    console.log(response, "CCCCCCCccc");
+
     if (response && response.data) {
       if (response.data.error === 0) {
         yield put(listUsersSuccess({ response: response.data }));
@@ -15,6 +18,8 @@ export function* listUsers(action) {
       }
     }
   } catch (error) {
+    console.log(error, "CCCCCCCccc");
+
     yield put(listUsersError({ error: "Data not fetched" }));
   }
 }

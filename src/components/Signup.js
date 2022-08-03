@@ -76,6 +76,7 @@ const Signup = () => {
         <form onSubmit={handleSignupSubmit}>
           <TextField
             fullWidth
+            required
             className="mb-3"
             label="Username"
             type="text"
@@ -84,6 +85,7 @@ const Signup = () => {
 
           <TextField
             fullWidth
+            required
             className="mb-3"
             label="Password"
             type="password"
@@ -99,8 +101,8 @@ const Signup = () => {
               defaultValue={MenuItem.Guest}
               onChange={(e) => handleUser(e.target.value, "role")}
             >
-              <MenuItem value={"Admin"}>Admin</MenuItem>
-              <MenuItem value={"Guest"}>Guest</MenuItem>
+              <MenuItem value={"admin"}>Admin</MenuItem>
+              <MenuItem value={"guest"}>Guest</MenuItem>
             </Select>
           </FormControl>
           <Button

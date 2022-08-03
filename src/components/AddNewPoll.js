@@ -13,13 +13,22 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { makeStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+const useStyles = makeStyles((theme) => ({
+  customHoverFocus: {
+    "&:hover, &.Mui-focusVisible": { backgroundColor: "red", color: "white" },
+  },
+}));
 const AddNewPoll = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const classes = useStyles();
+
   const [addPoll, setAddPoll] = useState({
     title: "",
     options: [" "],
@@ -91,6 +100,7 @@ const AddNewPoll = () => {
           <form onSubmit={handleAddPollSubmit}>
             <TextField
               fullWidth
+              required
               id="standard-basic"
               label="Title"
               type="text"
@@ -101,22 +111,29 @@ const AddNewPoll = () => {
               addPoll.options.map((opt, index) => {
                 return (
                   <>
-                    <Box className="flex">
+                    <Box className="flex justify-between">
                       <TextField
                         key="index"
                         id="standard-basic"
                         className="mt-3"
                         label="Option "
                         fullWidth
+                        required
                         variant="standard"
                         value={opt.options}
                         onChange={(e) => handlePollOptionData(index, e)}
                       />
-                      <DeleteIcon
+                      <Box className="mt-3 ml-5">
+                        <IconButton className={classes.customHoverFocus}>
+                          <DeleteIcon onClick={() => deleteOption(index)} />
+                        </IconButton>
+                      </Box>
+
+                      {/* <DeleteIcon
                         className="mt-4"
                         sx={{ color: "#e60000" }}
                         onClick={() => deleteOption(index)}
-                      />
+                      /> */}
                     </Box>
                   </>
                 );
@@ -126,10 +143,10 @@ const AddNewPoll = () => {
             ) : (
               ""
             )}
+            <br />
             <Button
-              fullWidth
               type="submit"
-              className="my-3 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+              className="my-3 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-4 py-2.5 text-center mb-2"
               onClick={handleClick}
             >
               {add_new_poll_store.isLoading ? (
@@ -137,6 +154,13 @@ const AddNewPoll = () => {
               ) : (
                 "Add new poll"
               )}
+            </Button>&nbsp; &nbsp;
+            <Button
+              type="submit"
+              className="my-3 text-white bg-gradient-to-r from-gray-400 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-gray-500/50 dark:shadow-lg dark:shadow-gray-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center  mb-2"
+              onClick={()=>{navigate(-1)}}
+            >
+             Cancel
             </Button>
             {add_new_poll_store.isSuccess ? (
               <>
@@ -161,6 +185,17 @@ const AddNewPoll = () => {
             )}
           </form>
         </FormControl>
+      </div>
+      <div className="flex justify-center mt-3">
+        <Button
+          type="button"
+          class="text-gray-900 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-500 hover:bg-gradient-to-br
+           focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg 
+           text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </Button>
       </div>
     </div>
   );

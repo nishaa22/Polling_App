@@ -17,6 +17,8 @@ const listUsers = (state = initial_state, action) => {
         isError: false,
       };
     case actions.LIST_USERS_SUCCESS:
+      console.log(action.payload.response, "XXXXXXXXXXXXXxx");
+
       return {
         ...state,
         isLoading: false,

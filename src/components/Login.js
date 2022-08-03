@@ -54,7 +54,7 @@ const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("userType")) {
       const userType = localStorage.getItem("userType");
-      if (userType === "Guest") {
+      if (userType === "guest") {
         setTimeout(() => navigate("/guest"), 500);
       } else {
         setTimeout(() => navigate("/admin"), 500);
@@ -70,6 +70,7 @@ const Login = () => {
         <form onSubmit={handleLoginSubmit}>
           <TextField
             fullWidth
+            required
             type="text"
             className="mb-2"
             label="Username"
@@ -77,6 +78,7 @@ const Login = () => {
           />
           <TextField
             fullWidth
+            required
             type="password"
             className="mb-2"
             label="Password"
