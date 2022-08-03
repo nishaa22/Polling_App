@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Box,
@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  addNewPollOptionRequest,
   deletePollOptionRequest,
   deletePollRequest,
   listPollRequest,
@@ -24,6 +25,7 @@ import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+import Pagination from "@mui/material/Pagination";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -36,19 +38,37 @@ const useStyles = makeStyles((theme) => ({
 const ViewPolls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [isDisabled, setIsDisabled]=React.useState(false);
-  const [id,setId]=React.useState();
+  const [id, setId] = React.useState();
   const [deleteId, setDeleteId] = React.useState();
-
-  // console.log(deleteId, "fgdgssfdfsdf");
   const view_polls_loader = useSelector((state) => state.view_poll_state);
-  // console.log(view_polls_loader);
   const view_polls = useSelector((state) => state.view_poll_state.data);
+  const view_polls_data = view_polls?.data || [];
   const delete_poll_store = useSelector((state) => state.delete_poll_state);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paginatedData, setPaginatedData] = useState([]);
+  const pageSize = 8;
 
+  const paginationFunc = (view_polls_data, length) => {
+    let arr = [],
+      i = 0,
+      n = view_polls_data.length;
+    while (i < n) {
+      arr.push(view_polls_data.slice(i, (i += length)));
+    }
+    return arr;
+  };
   useEffect(() => {
     dispatch(viewPollRequest());
   }, []);
+  useEffect(() => {
+    if (view_polls_data.length > 0) {
+      setPaginatedData(paginationFunc(view_polls_data, pageSize));
+    }
+  }, [view_polls_data]);
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber + 1);
+  };
+
   const deletePollFunc = (_id) => {
     setId(_id);
     setOpen(true);
@@ -69,13 +89,13 @@ const ViewPolls = () => {
     navigate(`/editpoll/${_id}`);
   };
   const deletePollOptionFunc = (_id, option) => {
-    console.log(_id)
-    setId(_id)
+    console.log(_id);
+    setId(_id);
     setOpen(true);
     dispatch(deletePollOptionRequest({ _id, option }));
   };
   const list_a_poll = (_id) => {
-    console.log("vote")
+    console.log("vote");
     dispatch(listPollRequest({ _id }));
     navigate(`/listpoll/${_id}`);
   };
@@ -94,13 +114,13 @@ const ViewPolls = () => {
   const delete_option_store = useSelector(
     (state) => state && state.delete_option_state
   );
-console.log(delete_option_store);
+  console.log(delete_option_store);
   const classes = useStyles();
   return (
     <>
       <Card className="flex flex-wrap justify-center">
-        {view_polls &&
-          view_polls.data.map((data) => {
+        {paginatedData.length > 0 &&
+          paginatedData[currentPage].map((data) => {
             return (
               <>
                 <CardContent className="w-1/3 border-1 m-4 shadow-lg">
@@ -129,6 +149,7 @@ console.log(delete_option_store);
                               variant="outlined"
                               className="shadow-md border-2 border-black text-black px-4"
                               onClick={() => voteApi(data._id, val.option)}
+                              disabled={val.vote === 1 ? true : false}
                             >
                               vote:{val.vote}
                             </Button>
@@ -224,6 +245,10 @@ console.log(delete_option_store);
             );
           })}
       </Card>
+      <Pagination
+        count={view_polls_data.length / pageSize}
+        onChange={(e, pageNumber) => handlePagination(pageNumber)}
+      />
       {view_polls_loader.isLoading ? <LinearProgress color="inherit" /> : ""}
     </>
   );

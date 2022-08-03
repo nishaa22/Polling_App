@@ -14,9 +14,9 @@ const ListUsers = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedData, setPaginatedData] = useState([]);
-  const pageSize = 10;
-  const userList = useSelector((state) => state.user_list_state);
-  const userList_store = useSelector((state) => state.user_list_state.data);
+  const pageSize = 30;
+  const {userList} = useSelector((state) => state.user_list_state);
+  const {userList_store} = useSelector((state) => state.user_list_state.data);
   let userListArray = userList_store?.data || [];
 
   const paginationFunc = (userListArray, length) => {
@@ -58,12 +58,13 @@ const ListUsers = () => {
           Go Back
         </Button>
       </div>
-      <Card className="flex flex-wrap justify-center">
+      <Card className="ml-16">
         {paginatedData.length > 0 &&
           paginatedData[currentPage].map((val) => {
             return (
-              <CardContent className="border-1 shadow-md w-1/4 m-2">
+              <CardContent className="flex border-1 shadow-md w-11/12  m-2">
                 <Typography
+                  className="w-1/4"
                   sx={{ fontSize: 14 }}
                   color="text.secondary"
                   gutterBottom
@@ -72,6 +73,7 @@ const ListUsers = () => {
                   {val._id}
                 </Typography>
                 <Typography
+                  className="w-1/4"
                   sx={{ fontSize: 14 }}
                   color="text.secondary"
                   gutterBottom
@@ -79,6 +81,7 @@ const ListUsers = () => {
                   <b>Username : </b> {val.username}
                 </Typography>
                 <Typography
+                  className="w-1/4"
                   sx={{ fontSize: 14 }}
                   color="text.secondary"
                   gutterBottom
@@ -87,6 +90,7 @@ const ListUsers = () => {
                   {val.password}
                 </Typography>
                 <Typography
+                  className="w-1/4"
                   sx={{ fontSize: 14 }}
                   color="text.secondary"
                   gutterBottom

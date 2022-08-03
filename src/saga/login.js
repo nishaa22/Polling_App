@@ -1,4 +1,4 @@
-import { logInSuccess, logInError, logInFulfill } from "../actions/index";
+import { logInSuccess, logInError } from "../actions/index";
 import { put, call } from "@redux-saga/core/effects";
 import axios from "axios";
 import jwt_decode from "jwt-decode";

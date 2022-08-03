@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   TextField,
@@ -43,14 +43,23 @@ const AddNewPoll = () => {
     }
   };
   const add_new_poll_store = useSelector((state) => state.add_new_poll_state);
-  console.log(add_new_poll_store, "add new poll store...");
   const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const handleSuccess = () => {
     setOpen(true);
     setTimeout(() => navigate("/admin"), 1000);
   };
-
+  useEffect(() => {
+    if (add_new_poll_store.isSuccess) {
+      setOpen(true);
+      navigate("/admin");
+    }
+    return;
+  }, [add_new_poll_store]);
+  // useEffect(() => {
+  //   // console.log("unmounted");
+  //   dispatch(addNewPollRequest(false));
+  // }, []);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -128,12 +137,6 @@ const AddNewPoll = () => {
                           <DeleteIcon onClick={() => deleteOption(index)} />
                         </IconButton>
                       </Box>
-
-                      {/* <DeleteIcon
-                        className="mt-4"
-                        sx={{ color: "#e60000" }}
-                        onClick={() => deleteOption(index)}
-                      /> */}
                     </Box>
                   </>
                 );
@@ -147,20 +150,24 @@ const AddNewPoll = () => {
             <Button
               type="submit"
               className="my-3 text-white bg-gradient-to-r from-cyan-500 via-cyan-700 to-cyan-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-4 py-2.5 text-center mb-2"
-              onClick={handleClick}
+              // onClick={handleClick}
             >
               {add_new_poll_store.isLoading ? (
                 <CircularProgress sx={{ color: "white" }} />
               ) : (
                 "Add new poll"
               )}
-            </Button>&nbsp; &nbsp;
+            </Button>
+            {/* {add_new_poll_store.isSuccess?handleSuccess():""} */}
+            &nbsp; &nbsp;
             <Button
               type="submit"
               className="my-3 text-white bg-gradient-to-r from-gray-400 via-gray-600 to-gray-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-gray-500/50 dark:shadow-lg dark:shadow-gray-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center  mb-2"
-              onClick={()=>{navigate(-1)}}
+              onClick={() => {
+                navigate(-1);
+              }}
             >
-             Cancel
+              Cancel
             </Button>
             {add_new_poll_store.isSuccess ? (
               <>
